@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LoginTitle from './LoginTItle'
+import LoginTitle from './LoginTitle'
 import LoginBtn from './LoginBtn'
 import LoginDivider from './LoginDivider'
 import LoginGoogle from './LoginGoogle'
