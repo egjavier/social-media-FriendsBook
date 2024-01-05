@@ -9,10 +9,32 @@ function ContextProvider({children}) {
   }
 
   const [ userInfo, setUserInfo ] = useState(storedUserInfo)
+  // REGISTER
+  const [ firstname, setFirstName ] = useState("")
+  const [ lastname, setLastname ] = useState("")
+  const [ username, setUsername ] = useState("")
+  const [ isEmail, setIsEmail ] = useState("")
+  const [ dob, setDob ] = useState("")
+  const [ isPassword, setIsPassword ] = useState("")
+  const [ isConfirmPassword, setIsConfirmPassword ] = useState("")
+  // IF USER IS LOGGED IN
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  // PROFILE PHOTO
+  const [ profilePhoto, setProfilePhoto ] = useState("")
 
   return (
     <Context.Provider value={{
-                              userInfo, setUserInfo
+                              userInfo, setUserInfo,
+                              // Register
+                              firstname, setFirstName,
+                              lastname, setLastname,
+                              username, setUsername,
+                              isEmail, setIsEmail,
+                              dob, setDob,
+                              isPassword, setIsPassword,
+                              isConfirmPassword, setIsConfirmPassword,
+                              isLoggedIn, setIsLoggedIn,
+                              profilePhoto, setProfilePhoto
                             }}>
     {children}
   </Context.Provider>

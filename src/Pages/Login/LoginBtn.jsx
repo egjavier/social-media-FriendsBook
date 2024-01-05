@@ -1,10 +1,31 @@
 import React from 'react'
+import { auth } from '../../Config/FirebaseConfig'
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-function LoginBtn() {
+function LoginBtn({userEmail, userPassword}) {
 
+  const email = userEmail
+  const password = userPassword
 
   const handleSignin = () => {
-    alert('signin!')
+    if (userEmail !== "" && userPassword !== "") {
+      try{
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            console.log('user logged in')
+            console.log("user: ", user)
+          })
+          .catch((error) => {
+            console.error(error)
+            alert('Invalid Credential')
+          });
+      } catch(error) {
+        console.error(error)
+      }
+    } else {
+      alert('Missing fields!')
+    }
   }
 
   return (

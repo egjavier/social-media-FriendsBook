@@ -45,7 +45,7 @@ function LoginForm({isRegister, setIsRegister}) {
                           hover:underline mt-1 md:mt-2 italic text-end cursor-pointer'>
           Having trouble logging in?
         </small>
-        <LoginBtn />
+        <LoginBtn userEmail={userEmail} userPassword={userPassword} />
       </div>
 
       <LoginDivider />
@@ -57,13 +57,13 @@ function LoginForm({isRegister, setIsRegister}) {
                       md:mt-2 italic'>
           Doesn't have an account yet?
         </p>
-        <p className='text-[0.70rem] md:text-xs text-white md:text-[#F76C43] leading-4 
+        <button className='text-[0.70rem] md:text-xs text-white md:text-[#F76C43] leading-4 
                       hover:underline italic cursor-pointer'
             onClick={() => {
               setIsRegister(!isRegister)
             }}>
           Register here
-        </p>
+        </button>
       </div>
 
     </section>
