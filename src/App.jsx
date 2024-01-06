@@ -7,6 +7,11 @@ import { onAuthStateChanged } from "firebase/auth"
 import { auth } from './Config/FirebaseConfig'
 import { useContext, useEffect } from "react"
 import Context from "./Context/Context"
+import ProfilePage from "./Pages/Profile/ProfilePage"
+import InboxPage from "./Pages/Inbox/InboxPage"
+import NotificationsPage from "./Pages/Notifications/NotificationsPage"
+import FriendsList from "./Pages/Friends/FriendsList"
+import Gallery from "./Pages/Gallery/GalleryPage"
 
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
           <Route index element={isLoggedIn ? <HomePage /> : <LoginPage />} />
           <Route path="login" element={isLoggedIn ? <HomePage /> : <LoginPage />} />
           <Route path="home" element={isLoggedIn ? <HomePage /> : <LoginPage />}/>
+          <Route path=":id" element={isLoggedIn ? <ProfilePage /> : <LoginPage />}/>
+          <Route path="inbox" element={isLoggedIn ? <InboxPage /> : <LoginPage />}/>
+          <Route path="notifications" element={isLoggedIn ? <NotificationsPage /> : <LoginPage />}/>
+          <Route path="friends" element={isLoggedIn ? <FriendsList /> : <LoginPage />}/>
+          <Route path="gallery" element={isLoggedIn ? <Gallery /> : <LoginPage />}/>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

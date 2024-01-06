@@ -9,7 +9,7 @@ function LoginPage() {
   const [ isRegister, setIsRegister ] = useState(false)
 
   return (
-    <section className='login min-h-screen md:py-10'>
+    <section className='login h-screen md:py-10'>
       {
         isRegister === true && <RegisterPage close={() =>  {setIsRegister(false)}}/>
       }
