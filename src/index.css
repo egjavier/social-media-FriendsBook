@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+dark blue: #2351A7
+light blue: #AACEFE
+orange: #F76C43
+light orange: #F98C6D
+lavander: #EFD0E0
+white: #FFFFFF 
+*/
 
 body {
   padding: 0;
@@ -10,6 +18,7 @@ body {
   box-sizing: border-box;
   position: relative;
   overflow-x: hidden;
+  @apply text-gray-800
 }
 
 ::-webkit-scrollbar {

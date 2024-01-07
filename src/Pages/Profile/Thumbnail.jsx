@@ -7,7 +7,7 @@ function Thumbnail() {
     <div className=''>
       <img  src={thumbnailPlaceholder}
             alt="" 
-            className='max-h-[300px] w-full object-cover'
+            className='max-h-[400px] w-full object-cover'
       />
     </div>
   )

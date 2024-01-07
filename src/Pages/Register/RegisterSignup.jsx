@@ -37,6 +37,7 @@ function RegisterSignup() {
           const user = {
             ...u,
             lastname: lastname,
+            firstname: firstname,
             displayName: username,
             dob: dob,
             email: isEmail,

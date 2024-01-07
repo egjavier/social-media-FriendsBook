@@ -9,7 +9,6 @@ function RegisterForm() {
 
   // CONTEXT
     const {
-            userInfo, 
             firstname, setFirstName,
             lastname, setLastname,
             username, setUsername,
