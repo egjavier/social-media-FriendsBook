@@ -1,12 +1,17 @@
-import React from 'react'
-import { auth } from '../../Config/FirebaseConfig'
+import React, { useContext } from 'react'
+import db, { auth } from '../../Config/FirebaseConfig'
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore"
+import Context from '../../Context/Context';
 
 function LoginBtn({userEmail, userPassword}) {
 
+  // CONTEXT
+  const { setUserInfo } = useContext(Context)
+
   const email = userEmail
   const password = userPassword
-
+  
   const handleSignin = () => {
     if (userEmail !== "" && userPassword !== "") {
       try{
@@ -14,11 +19,14 @@ function LoginBtn({userEmail, userPassword}) {
           .then((userCredential) => {
             const user = userCredential.user;
             console.log('user logged in')
-            console.log("user: ", user)
+
+          // FETCH DATA
+            fetch(user)
+
           })
           .catch((error) => {
             console.error(error)
-            alert('Invalid Credential')
+            alert("Invalid credential. Try again.")
           });
       } catch(error) {
         console.error(error)
@@ -27,6 +35,21 @@ function LoginBtn({userEmail, userPassword}) {
       alert('Missing fields!')
     }
   }
+
+  const fetch = async(user) => {
+    // FETCH DATA
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const users = querySnapshot.docs.map( e => ({...e.data(), id: e.id})) 
+    console.log("users", users) 
+    users.map(e => {
+      if (e.email === user.email ) {
+
+      // STORE USERINFO TO LOCALSTORAGE
+      localStorage.setItem("user", JSON.stringify(e))
+      setUserInfo(e)
+      }
+    })
+}
 
   return (
     <button className='bg-[#2351A7] py-1 rounded-md text-sm hover:shadow-md

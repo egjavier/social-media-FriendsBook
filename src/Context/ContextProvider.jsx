@@ -8,6 +8,16 @@ function ContextProvider({children}) {
     return user ? JSON.parse(user) : []
   }
 
+  const storedPostsArray = () => {
+    const d = localStorage.getItem("postsArray") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedGalleryArray = () => {
+    const d = localStorage.getItem("galleryArray") 
+    return d ? JSON.parse(d) : []
+  }
+
   const [ userInfo, setUserInfo ] = useState(storedUserInfo)
   // REGISTER
   const [ firstname, setFirstName ] = useState("")
@@ -21,6 +31,14 @@ function ContextProvider({children}) {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
   // PROFILE PHOTO
   const [ profilePhoto, setProfilePhoto ] = useState("")
+  // ADD POST
+  const [ uploadedMedia, setUploadedMedia ] = useState("")
+  const [ postText, setPostText ] = useState("")
+  const [ postPrivacy, setPostPrivacy ] = useState('Public')
+  // POSTS ARRAY
+  const [ postsArray, setPostsArray ] = useState(storedPostsArray)
+  // GALLERY ARRAY
+  const [ galleryArray, setGalleryArray ] = useState(storedGalleryArray)
 
   return (
     <Context.Provider value={{
@@ -34,7 +52,15 @@ function ContextProvider({children}) {
                               isPassword, setIsPassword,
                               isConfirmPassword, setIsConfirmPassword,
                               isLoggedIn, setIsLoggedIn,
-                              profilePhoto, setProfilePhoto
+                              profilePhoto, setProfilePhoto,
+                              // ADD POST
+                              uploadedMedia, setUploadedMedia,
+                              postText, setPostText,
+                              postPrivacy, setPostPrivacy,
+                              // POSTS ARRAY
+                              postsArray, setPostsArray,
+                              // GALLERY ARRAY
+                              galleryArray, setGalleryArray
                             }}>
     {children}
   </Context.Provider>

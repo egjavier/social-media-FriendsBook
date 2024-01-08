@@ -12,13 +12,8 @@ function AddPost() {
       document.getElementById('addPostModal').showModal()
     }
 
-  // ADD IMAGE MO
-    const handleAddImage = () => {
-      alert('add image')
-    }
-
   return (
-    <section className='addPost border rounded-xl overflow-hidden py-2'>
+    <section className='addPost border rounded-xl overflow-hidden py-2 bg-white'>
 
       <div className='grid grid-cols-7 py-2 px-5'>
         <img src={userInfo.profilePhoto}
@@ -26,7 +21,7 @@ function AddPost() {
               className='w-12 h-12 rounded-full object-cover col-span-1'
         />
         <p  className='border col-span-6 rounded-3xl indent-3 text-sm md:text-base cursor-pointer
-                    flex justify-start items-center text-gray-500 italic bg-gray-100'
+                    flex justify-start items-center text-gray-500 italic'
             onClick={showPostModal}>
           Say your thoughts...
         </p>
@@ -35,7 +30,7 @@ function AddPost() {
 
       <hr />
 
-      <label className='py-2 bg-gray-100 text-gray-500 flex gap-2 justify-center items-center text-sm md:text-base cursor-pointer hover:underline'
+      <label className='py-2 text-gray-500 flex gap-2 justify-center items-center text-sm md:text-base cursor-pointer hover:underline'
             onClick={showPostModal}
             htmlFor='uploadPhoto'>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

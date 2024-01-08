@@ -18,7 +18,7 @@ body {
   box-sizing: border-box;
   position: relative;
   overflow-x: hidden;
-  @apply text-gray-800
+  @apply text-gray-800 bg-[#f7f7f7]
 }
 
 ::-webkit-scrollbar {

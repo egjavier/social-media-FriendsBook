@@ -7,12 +7,13 @@ import ProfileName from './ProfileName'
 import AddStoryMobile from './AddStoryMobile'
 import EditProfileMobile from './EditProfileMobile'
 import AddPost from '../../Components/AddPostFolder/AddPost'
+import MyPosts from './MyPosts'
 
 function ProfilePage() {
 
   return (
     <section className='profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 mb-5'>
-      <div className='relative '>
+      <div className='relative'>
         <Thumbnail />
         <div className='absolute w-full px-10 bottom-[-95px] text-center flex
                         justify-center md:justify-between md:items-center'>
@@ -36,10 +37,11 @@ function ProfilePage() {
         </div>
       </div>
 
-      <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2'>
+      <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2 h-screen overflow-y-scroll'>
         <div className='hidden md:block bg-pink-300 col-span-3'>left</div>
         <div className='md:col-span-6'>
           <AddPost />
+          <MyPosts />
         </div>
         <div className='hidden md:block bg-pink-300 col-span-3'>chat</div>
       </div>
