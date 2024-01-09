@@ -2,7 +2,7 @@ import React from 'react'
 
 function LoginTitle() {
   return (
-    <div className='text-center'>
+    <div className='text-center flex flex-col gap-2'>
       <p className='text-2xl font-bold tracking-wide
                     text-slate-700'>
         Login

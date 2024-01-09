@@ -27,6 +27,7 @@ function ContextProvider({children}) {
   const [ dob, setDob ] = useState("")
   const [ isPassword, setIsPassword ] = useState("")
   const [ isConfirmPassword, setIsConfirmPassword ] = useState("")
+  const [ thumbnail, setThumbnail ] = useState("")
   // IF USER IS LOGGED IN
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
   // PROFILE PHOTO
@@ -39,6 +40,10 @@ function ContextProvider({children}) {
   const [ postsArray, setPostsArray ] = useState(storedPostsArray)
   // GALLERY ARRAY
   const [ galleryArray, setGalleryArray ] = useState(storedGalleryArray)
+  // MYPOSTS
+  const [ myPostsArray, setMyPostsArray ] = useState([])
+  // THUMBNAIL
+  const [ uploadedThumbnail, setUploadedThumbnail ] = useState("")
 
   return (
     <Context.Provider value={{
@@ -53,6 +58,7 @@ function ContextProvider({children}) {
                               isConfirmPassword, setIsConfirmPassword,
                               isLoggedIn, setIsLoggedIn,
                               profilePhoto, setProfilePhoto,
+                              thumbnail, setThumbnail,
                               // ADD POST
                               uploadedMedia, setUploadedMedia,
                               postText, setPostText,
@@ -60,7 +66,11 @@ function ContextProvider({children}) {
                               // POSTS ARRAY
                               postsArray, setPostsArray,
                               // GALLERY ARRAY
-                              galleryArray, setGalleryArray
+                              galleryArray, setGalleryArray,
+                              // MYPOSTS
+                              myPostsArray, setMyPostsArray,
+                              // THUMBNAIL
+                              uploadedThumbnail, setUploadedThumbnail
                             }}>
     {children}
   </Context.Provider>

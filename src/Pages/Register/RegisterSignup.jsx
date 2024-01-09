@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import Context from '../../Context/Context'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { collection, addDoc} from "firebase/firestore"
+import { collection, addDoc, getDocs} from "firebase/firestore"
 import db, { auth } from '../../Config/FirebaseConfig'
 
 function RegisterSignup() {
 
   // CONTEXT
   const {
-    setUserInfo,
+    setUserInfo, userInfo,
     firstname,
     lastname,
     username,
@@ -17,6 +17,7 @@ function RegisterSignup() {
     isPassword,
     isConfirmPassword,
     profilePhoto,
+    thumbnail,
   } = useContext(Context)
 
   // CREATING A USER
@@ -33,18 +34,6 @@ function RegisterSignup() {
           updateProfile(auth.currentUser, {
             displayName: username,
           })
-        // CURRENT USER INFO
-          const user = {
-            ...u,
-            lastname: lastname,
-            firstname: firstname,
-            displayName: username,
-            dob: dob,
-            email: isEmail,
-            userId: u.uid,
-            profilePhoto: profilePhoto
-          }
-          console.log(user)
         // ADD USER DATA TO DATABASE
           addDoc(collection(db, "users"), {
             firstname: firstname,
@@ -53,11 +42,12 @@ function RegisterSignup() {
             dob: dob,
             email: isEmail,
             userId: u.uid,
-            profilePhoto: profilePhoto
+            profilePhoto: profilePhoto,
+            thumbnail: thumbnail
           })
         // STORE USERINFO TO LOCALSTORAGE
-          localStorage.setItem("user", JSON.stringify(user))
-          setUserInfo(user)
+          fetch(u)
+          console.log("userInfo", userInfo)
       })
       .catch((error) => {
         console.log(error)
@@ -67,6 +57,21 @@ function RegisterSignup() {
       console.error(error)
     }
   }
+
+  const fetch = async(u) => {
+    // FETCH DATA
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const users = querySnapshot.docs.map( e => ({...e.data(), id: e.id})) 
+    console.log("users", users) 
+    users.map(e => {
+      if (e.email === u.email ) {
+
+      // STORE USERINFO TO LOCALSTORAGE
+      localStorage.setItem("user", JSON.stringify(e))
+      setUserInfo(e)
+      }
+    })
+}
 
   return (
     <div className='flex flex-col gap-2 mb-2'>

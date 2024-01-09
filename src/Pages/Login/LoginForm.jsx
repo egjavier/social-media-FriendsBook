@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import LoginTitle from './LoginTitle'
 import LoginBtn from './LoginBtn'
-import LoginDivider from './LoginDivider'
-import LoginGoogle from './LoginGoogle'
 
 function LoginForm({isRegister, setIsRegister}) {
 
@@ -17,7 +15,7 @@ function LoginForm({isRegister, setIsRegister}) {
       <LoginTitle />
 
       {/* input username & password */}
-      <div className='flex flex-col w-full gap-2'>
+      <div className='flex flex-col w-full gap-3'>
         <input  type="text"
                 name='email'
                 placeholder='Email'
@@ -38,18 +36,11 @@ function LoginForm({isRegister, setIsRegister}) {
                 }}
                 className='indent-2 py-1 rounded-md focus:outline-none
                 text-slate-600 text-sm bg-white/60 placeholder:text-slate-600
-                  md:text-md md:border md:border-slate-300'
+                  md:text-md md:border md:border-slate-300 mb-5'
         />
 
-        <small className='text-[0.70rem] md:text-xs text-slate-600 leading-4 
-                          hover:underline mt-1 md:mt-2 italic text-end cursor-pointer'>
-          Having trouble logging in?
-        </small>
         <LoginBtn userEmail={userEmail} userPassword={userPassword} />
       </div>
-
-      <LoginDivider />
-      <LoginGoogle />
 
       {/* Register */}
       <div className='flex flex-col justify-end items-end w-full'>
