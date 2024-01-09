@@ -5,12 +5,27 @@ import FeedSkeleton from '../../Components/FeedSkeleton'
 
 function MyPosts() {
   // CONTEXT
-  const { myPostsArray } = useContext(Context)
+  const { 
+          myPostsArray, setMyPostsArray, 
+          postsArray,
+          userInfo
+        } = useContext(Context)
 
   const [ isLoading, setIsLoading ] = useState(true)
 
+  const myPosts = () => {
+    // MY POSTS
+    const array = []
+    postsArray.forEach(post => {
+      post.email === userInfo.email && array.push(post)
+      localStorage.setItem("myPostsArray", JSON.stringify(array))
+      setMyPostsArray(array)
+    })
+  }
+
   // SKELETON LOADER
     useEffect(() => {
+      myPosts()
       setTimeout(() => {
         setIsLoading(false)
       }, 5000)

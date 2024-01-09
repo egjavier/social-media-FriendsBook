@@ -25,14 +25,6 @@ function Feed() {
         localStorage.setItem("postsArray", JSON.stringify(d))
         setPostsArray(d)
 
-        // MY POSTS
-        const array = []
-        postsArray.forEach(post => {
-          post.email === userInfo.email && array.push(post)
-          localStorage.setItem("myPostsArray", JSON.stringify(array))
-          setMyPostsArray(array)
-        })
-
       }catch(e) {
         console.error(e)
       }
