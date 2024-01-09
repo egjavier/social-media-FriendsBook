@@ -30,6 +30,9 @@ function GalleryPage() {
       if(userInfo.email === d.email) {
         localStorage.setItem("galleryArray", JSON.stringify(d))
         setGalleryArray(d)
+
+      } else {
+        setGalleryArray([])
       }
 
     }catch(e) {
@@ -39,6 +42,7 @@ function GalleryPage() {
 
   useEffect(() => {
     fetch()
+    console.log("galleryArray", galleryArray)
     // SKELETON LOADER
     setTimeout(() => {
       setIsLoading(false)
