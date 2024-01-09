@@ -16,6 +16,8 @@ function MyPosts() {
       }, 5000)
     }, [])
 
+
+    console.log("myPostsArray", myPostsArray)
   return (
     <section>
       {

@@ -29,6 +29,7 @@ function Feed() {
         const array = []
         postsArray.forEach(post => {
           post.email === userInfo.email && array.push(post)
+          localStorage.setItem("myPostsArray", JSON.stringify(array))
           setMyPostsArray(array)
         })
 

@@ -18,6 +18,11 @@ function ContextProvider({children}) {
     return d ? JSON.parse(d) : []
   }
 
+  const storedMyPostsArray = () => {
+    const d = localStorage.getItem("myPostsArray") 
+    return d ? JSON.parse(d) : []
+  }
+
   const [ userInfo, setUserInfo ] = useState(storedUserInfo)
   // REGISTER
   const [ firstname, setFirstName ] = useState("")
@@ -41,7 +46,7 @@ function ContextProvider({children}) {
   // GALLERY ARRAY
   const [ galleryArray, setGalleryArray ] = useState(storedGalleryArray)
   // MYPOSTS
-  const [ myPostsArray, setMyPostsArray ] = useState([])
+  const [ myPostsArray, setMyPostsArray ] = useState(storedMyPostsArray)
   // THUMBNAIL
   const [ uploadedThumbnail, setUploadedThumbnail ] = useState("")
 
