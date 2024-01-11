@@ -56,6 +56,8 @@ function ContextProvider({children}) {
   const [ myGallery, setMyGallery ] = useState(storedMyGallery)
   // THUMBNAIL
   const [ uploadedThumbnail, setUploadedThumbnail ] = useState("")
+  // NEW POST
+  const [ isNewPost, setIsNewPost ] = useState(false)
 
   return (
     <Context.Provider value={{
@@ -84,7 +86,9 @@ function ContextProvider({children}) {
                               // MYGALLERY
                               myGallery, setMyGallery,
                               // THUMBNAIL
-                              uploadedThumbnail, setUploadedThumbnail
+                              uploadedThumbnail, setUploadedThumbnail,
+                              // NEW POST
+                              isNewPost, setIsNewPost
                             }}>
     {children}
   </Context.Provider>

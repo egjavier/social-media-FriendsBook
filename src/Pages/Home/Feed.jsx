@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
-import db from '../../Config/FirebaseConfig'
 import Context from '../../Context/Context'
 import Hearts from './Hearts'
 import FeedSkeleton from '../../Components/FeedSkeleton'
@@ -9,33 +7,16 @@ function Feed() {
 
   const [ isLoading, setIsLoading ] = useState(true)
 
-  // CONTEXT
+  // // CONTEXT
   const { 
-          postsArray, setPostsArray
+          postsArray, setPostsArray,
         } = useContext(Context)
 
-  // FETCH DATA
-    const getPosts = async () => {
-      try {
-        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"))
-        const querySnapshot = await getDocs(q);
-        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
-        localStorage.setItem("postsArray", JSON.stringify(d))
-        setPostsArray(d)
-
-      }catch(e) {
-        console.error(e)
-      }
-    }
-
     useEffect(() => {
-      getPosts()
-
-      // SKELETON LOADER
+    // SKELETON LOADER
       setTimeout(() => {
         setIsLoading(false)
-      }, 5000)
-
+      }, 3000)
     }, [])
 
   return (

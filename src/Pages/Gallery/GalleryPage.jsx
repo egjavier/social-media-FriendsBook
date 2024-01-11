@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
-import db from "../../Config/FirebaseConfig"
 import Context from '../../Context/Context'
 import { useNavigate } from 'react-router-dom'
 import OpenImageModal from './OpenImageModal'
@@ -14,19 +12,13 @@ function GalleryPage() {
 
   // CONTEXT
   const { 
-          setGalleryArray, galleryArray,
+          galleryArray,
           myGallery, setMyGallery,
           userInfo 
         } = useContext(Context)
 
   // FETCH GALLERY
   const fetch = async() => {
-    try {
-      const q = query(collection(db, "gallery"), orderBy("timestamp", "desc"))
-      const querySnapshot = await getDocs(q);
-      const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
-      setGalleryArray(d)
-
       // FILTER MY IMAGES
       const array = []
       galleryArray.forEach(image => {
@@ -34,10 +26,6 @@ function GalleryPage() {
         localStorage.setItem("myGallery", JSON.stringify(array))
         setMyGallery(array)
       })
-    
-    }catch(e) {
-      console.error(e)
-    }
   }
 
   useEffect(() => {
@@ -47,8 +35,6 @@ function GalleryPage() {
       setIsLoading(false)
     }, 5000)
   }, [])
-
-  console.log("myGallery", myGallery)
 
 return (
   <section className='gallery min-h-screen max-w-[1200px] p-5 mx-auto bg-white overflow-y-scroll
@@ -67,13 +53,14 @@ return (
               ? <div className='w-full col-span-12 text-center text-sm text-gray-400 italic'>Gallery is empty</div>
               : myGallery.map(e => {
                 return(
-                      <div className='card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 border rounded-2xl overflow-hidden'>
+                      <div className='card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 border rounded-2xl overflow-hidden'
+                            key={e.id} >
                         <img  src={e.postImage}
                               alt={e.postText}
                               className='w-full h-52 object-cover cursor-pointer'
                               onClick={() => {
                                 document.getElementById('openImage').showModal()
-                                setImage(e.postImage)
+                                setImage(e)
                               }}
                         />
                       <div className='card-body py-1 px-2 flex gap-0'>

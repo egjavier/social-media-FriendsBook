@@ -10,7 +10,8 @@ function PostBtn() {
           userInfo, setPostsArray,
           uploadedMedia, setUploadedMedia,
           postText, setPostText,
-          postPrivacy, setPostPrivacy
+          postPrivacy, setPostPrivacy,
+          isNewPost, setIsNewPost
         } = useContext(Context)
 
   const handlePost = async() => {
@@ -58,6 +59,8 @@ function PostBtn() {
 
         // CLOSE MODAL
         document.getElementById('addPostModal').close()
+
+        setIsNewPost(true)
 
       } else {
         alert("Text field should not be empty.")

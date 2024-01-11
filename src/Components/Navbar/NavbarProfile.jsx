@@ -15,6 +15,7 @@ function NavbarProfile() {
   const handleLogout =() => {
     signOut(auth)
     location.reload()
+    localStorage.clear()
     navigate('/home', { replace: true })
   }
 

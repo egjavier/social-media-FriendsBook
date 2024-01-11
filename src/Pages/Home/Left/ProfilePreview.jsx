@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../../Context/Context'
-import thumbnailPlaceholder from '../../../Images/profileThumbnail.jpg'
 import { useNavigate } from 'react-router-dom'
 import ProfilePreviewSkeleton from './ProfilePreviewSkeleton'
 
@@ -12,7 +11,6 @@ function ProfilePreview() {
   // CONTEXT
   const { userInfo, myPostsArray } = useContext(Context)
 
-  console.log(userInfo)
   const goToProfile = () => {
     navigate(`/${userInfo.userId}`)
   }
@@ -21,7 +19,7 @@ function ProfilePreview() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 7000)
+    }, 3000)
   }, [])
 
 
@@ -30,9 +28,9 @@ function ProfilePreview() {
         {
           isLoading 
             ? <ProfilePreviewSkeleton />
-            :  <div className='bg-white w-full p-5 rounded-md'>
+            :  <div className='bg-white w-full min-h-96 p-5 rounded-xl'>
                 <div>
-                  <div className='cursor-pointer rounded-xl w-full h-36 bg-gray-300 flex justify-center items-center overflow-hidden'>
+                  <div className='cursor-pointer rounded-xl w-full h-40 bg-gray-300 flex justify-center items-center overflow-hidden'>
                   {
                     userInfo.thumbnail !== ""
                     ? <img  src={userInfo.thumbnail} 

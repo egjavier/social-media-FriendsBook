@@ -6,10 +6,13 @@ function OpenImageModal({image, post}) {
     <dialog id="openImage" className="modal">
       <div className="modal-box">
         {/* IMAGE */}
-          <img  src={image}
+          <img  src={image.postImage}
                   alt={post}
                   className=''
           />
+          <p className='text-start font-semibold mt-3'>
+            {image.postText}
+          </p>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}

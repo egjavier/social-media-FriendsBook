@@ -13,26 +13,13 @@ function MyPosts() {
 
   const [ isLoading, setIsLoading ] = useState(true)
 
-  const myPosts = () => {
-    // MY POSTS
-    const array = []
-    postsArray.forEach(post => {
-      post.email === userInfo.email && array.push(post)
-      localStorage.setItem("myPostsArray", JSON.stringify(array))
-      setMyPostsArray(array)
-    })
-  }
-
   // SKELETON LOADER
     useEffect(() => {
-      myPosts()
       setTimeout(() => {
         setIsLoading(false)
       }, 5000)
     }, [])
 
-
-    console.log("myPostsArray", myPostsArray)
   return (
     <section>
       {
