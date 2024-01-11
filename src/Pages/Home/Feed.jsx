@@ -11,9 +11,7 @@ function Feed() {
 
   // CONTEXT
   const { 
-          userInfo,
-          postsArray, setPostsArray,
-          myPostsArray, setMyPostsArray
+          postsArray, setPostsArray
         } = useContext(Context)
 
   // FETCH DATA
@@ -32,8 +30,6 @@ function Feed() {
 
     useEffect(() => {
       getPosts()
-      console.log(postsArray)
-      console.log(myPostsArray)
 
       // SKELETON LOADER
       setTimeout(() => {

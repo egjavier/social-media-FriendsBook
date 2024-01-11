@@ -14,7 +14,8 @@ function GalleryPage() {
 
   // CONTEXT
   const { 
-          galleryArray, setGalleryArray,
+          setGalleryArray, galleryArray,
+          myGallery, setMyGallery,
           userInfo 
         } = useContext(Context)
 
@@ -24,17 +25,16 @@ function GalleryPage() {
       const q = query(collection(db, "gallery"), orderBy("timestamp", "desc"))
       const querySnapshot = await getDocs(q);
       const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
-      console.log("d", d)
+      setGalleryArray(d)
 
-      // SAVE TO LOCAL STORAGE
-      if(userInfo.email === d.email) {
-        localStorage.setItem("galleryArray", JSON.stringify(d))
-        setGalleryArray(d)
-
-      } else {
-        setGalleryArray([])
-      }
-
+      // FILTER MY IMAGES
+      const array = []
+      galleryArray.forEach(image => {
+        image.email === userInfo.email && array.push(image)
+        localStorage.setItem("myGallery", JSON.stringify(array))
+        setMyGallery(array)
+      })
+    
     }catch(e) {
       console.error(e)
     }
@@ -42,12 +42,13 @@ function GalleryPage() {
 
   useEffect(() => {
     fetch()
-    console.log("galleryArray", galleryArray)
     // SKELETON LOADER
     setTimeout(() => {
       setIsLoading(false)
     }, 5000)
   }, [])
+
+  console.log("galleryArray", galleryArray)
 
 return (
   <section className='gallery min-h-screen max-w-[1200px] p-5 mx-auto bg-white overflow-y-scroll
@@ -57,15 +58,15 @@ return (
         Gallery
       </p>
     </div>
+      <div className=' grid grid-cols-12 justify-center gap-2'>
       {
         isLoading
           ? <GallerySkeleton />
           :  
-            galleryArray.length < 1
-              ? <div className='w-full text-center text-sm text-gray-400 italic'>Gallery is empty</div>
-              : galleryArray.map(e => {
+            myGallery.length < 1
+              ? <div className='w-full col-span-12 text-center text-sm text-gray-400 italic'>Gallery is empty</div>
+              : myGallery.map(e => {
                 return(
-                    <div className=' grid grid-cols-12 justify-center gap-2'>
                       <div className='card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 border rounded-2xl overflow-hidden'>
                         <img  src={e.postImage}
                               alt={e.postText}
@@ -91,10 +92,10 @@ return (
 
                       <OpenImageModal image={image} />
                       </div>
-                  </div>
                   )
-            })
-      }
+                })
+              }
+      </div>
     </section>
 )
   

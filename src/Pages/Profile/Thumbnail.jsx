@@ -8,7 +8,7 @@ function Thumbnail() {
   const { userInfo } = useContext(Context)
 
   return (
-    <button className='bg-gray-300 h-[400px] w-full flex justify-center items-center'
+    <div className='bg-gray-300 h-[400px] w-full flex justify-center items-center'
           onClick={() => {
             document.getElementById('thumbnailModal').showModal()
           }}>
@@ -24,7 +24,7 @@ function Thumbnail() {
       }
 
       <ThumbnailModal />
-    </button>
+    </div>
   )
 }
 

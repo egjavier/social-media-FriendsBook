@@ -15,10 +15,7 @@ function NavbarProfile() {
   const handleLogout =() => {
     signOut(auth)
     location.reload()
-    localStorage.removeItem("user")
-    localStorage.removeItem("postsArray")
-    localStorage.removeItem("galleryArray")
-    localStorage.removeItem("myPostsArray")
+    navigate('/home', { replace: true })
   }
 
   return (

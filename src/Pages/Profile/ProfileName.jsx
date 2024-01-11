@@ -5,7 +5,6 @@ function ProfileName() {
 
   // CONTEXT
   const { userInfo } = useContext(Context)
-  console.log(userInfo)
 
   return (
     <>

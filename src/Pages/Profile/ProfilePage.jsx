@@ -10,7 +10,7 @@ import AddPost from '../../Components/AddPostFolder/AddPost'
 import MyPosts from './MyPosts'
 
 function ProfilePage() {
-
+  
   return (
     <section className='profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 mb-5'>
       <div className='relative'>
