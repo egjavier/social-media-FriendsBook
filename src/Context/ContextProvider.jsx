@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Context from './Context'
 
 function ContextProvider({children}) {
@@ -20,6 +20,11 @@ function ContextProvider({children}) {
 
   const storedMyPostsArray = () => {
     const d = localStorage.getItem("myPostsArray") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedMyGallery = () => {
+    const d = localStorage.getItem("myGallery") 
     return d ? JSON.parse(d) : []
   }
 
@@ -47,6 +52,8 @@ function ContextProvider({children}) {
   const [ galleryArray, setGalleryArray ] = useState(storedGalleryArray)
   // MYPOSTS
   const [ myPostsArray, setMyPostsArray ] = useState(storedMyPostsArray)
+  // MY GALLERY
+  const [ myGallery, setMyGallery ] = useState(storedMyGallery)
   // THUMBNAIL
   const [ uploadedThumbnail, setUploadedThumbnail ] = useState("")
 
@@ -74,6 +81,8 @@ function ContextProvider({children}) {
                               galleryArray, setGalleryArray,
                               // MYPOSTS
                               myPostsArray, setMyPostsArray,
+                              // MYGALLERY
+                              myGallery, setMyGallery,
                               // THUMBNAIL
                               uploadedThumbnail, setUploadedThumbnail
                             }}>

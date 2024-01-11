@@ -48,7 +48,7 @@ function GalleryPage() {
     }, 5000)
   }, [])
 
-  console.log("galleryArray", galleryArray)
+  console.log("myGallery", myGallery)
 
 return (
   <section className='gallery min-h-screen max-w-[1200px] p-5 mx-auto bg-white overflow-y-scroll
