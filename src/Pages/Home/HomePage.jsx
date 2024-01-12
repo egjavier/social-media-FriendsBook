@@ -39,7 +39,7 @@ function HomePage() {
     // FETCH GALLERY
     const fetchGallery = async () => {
       try{
-        const r = query(collection(db, "gallery"))
+        const r = query(collection(db, "gallery"), orderBy("timestamp", "desc"))
         const qs = await getDocs(r);
         const e = qs.docs.map( f => ({...f.data(), id: f.id}))
         setGalleryArray(e)
