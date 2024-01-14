@@ -16,14 +16,15 @@ function StoriesSection() {
         storiesArray.map(e => {
           return(
             <div className='relative carousel-item rounded-full shadow-xl
-                            flex justify-center'>
+                            flex justify-center'
+                  key={e.storyUrl}>
               <img  src={e.storyUrl}
                     alt="Story for today" 
                     className=' h-28 w-28 rounded-full object-cover'
               />
               <div className='absolute bottom-[-20px]'>
-                <img  src={userInfo.profilePhoto} 
-                      alt={userInfo.displayName}
+                <img  src={e.profilePhoto} 
+                      alt={e.displayName}
                       className='w-10 h-10 rounded-full object-cover border-2 border-white'
                 />
               </div>

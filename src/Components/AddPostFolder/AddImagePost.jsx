@@ -5,7 +5,7 @@ import Context from '../../Context/Context'
 
 function AddImagePost() {
 
-  const [ postImage, setPostImage ] = useState([])
+  const [ postImage, setPostImage ] = useState("")
 
   // CONTEXT
   const { uploadedMedia, setUploadedMedia } = useContext(Context)
@@ -63,6 +63,7 @@ function AddImagePost() {
         <input  type='file'
                 id='uploadPhoto'
                 className='hidden'
+                defaultValue={postImage}
                 onChange={e => setPostImage(e.target.files[0])}
         />
         <label className='flex gap-2 justify-center items-center text-sm
