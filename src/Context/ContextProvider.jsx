@@ -28,6 +28,11 @@ function ContextProvider({children}) {
     return d ? JSON.parse(d) : []
   }
 
+  const storedStoriesArray = () => {
+    const d = localStorage.getItem("storiesArray") 
+    return d ? JSON.parse(d) : []
+  }
+
   const [ userInfo, setUserInfo ] = useState(storedUserInfo)
   // REGISTER
   const [ firstname, setFirstName ] = useState("")
@@ -58,6 +63,11 @@ function ContextProvider({children}) {
   const [ uploadedThumbnail, setUploadedThumbnail ] = useState("")
   // NEW POST
   const [ isNewPost, setIsNewPost ] = useState(false)
+  // ADD STORY
+  const [ storyUrl, setStoryUrl ] = useState("")
+  const [ storyName, setStoryName ] = useState("")
+  const [ isNewStory, setIsNewStory ] = useState(false)
+  const [ storiesArray, setStoriesArray]  = useState(storedStoriesArray)
 
   return (
     <Context.Provider value={{
@@ -88,7 +98,12 @@ function ContextProvider({children}) {
                               // THUMBNAIL
                               uploadedThumbnail, setUploadedThumbnail,
                               // NEW POST
-                              isNewPost, setIsNewPost
+                              isNewPost, setIsNewPost,
+                              // ADD STORY
+                              storyName, setStoryName,
+                              storyUrl, setStoryUrl,
+                              storiesArray, setStoriesArray,
+                              isNewStory, setIsNewStory
                             }}>
     {children}
   </Context.Provider>

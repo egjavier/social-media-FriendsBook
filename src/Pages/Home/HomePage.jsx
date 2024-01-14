@@ -6,6 +6,9 @@ import RightSection from './Right/RightSection'
 import Context from '../../Context/Context'
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
+import AddStorySmall from './Stories/AddStorySmall'
+import SearchSmall from './SearchSmall'
+import StoriesSection from './Stories/StoriesSection'
 
 function HomePage() {
 
@@ -18,13 +21,15 @@ function HomePage() {
           setPostsArray,
           galleryArray, setGalleryArray,
           setMyPostsArray,
-           setMyGallery,
-           isNewPost, setIsNewPost
+          setMyGallery,
+          isNewPost, setIsNewPost,
+          storiesArray, setStoriesArray,
+          isNewStory, setIsNewStory
         } = useContext(Context)
 
+    // FETCH POSTS
     const getPosts = async () => {
       try {
-        // FETCH POSTS
           const q = query(collection(db, "posts"), orderBy("timestamp", "desc"))
           const querySnapshot = await getDocs(q);
           const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
@@ -71,16 +76,35 @@ function HomePage() {
       }
     }
 
+    // FETCH STORIES
+    const fetchStories = async () => {
+      try{
+        const q = query(collection(db, "stories"), orderBy("timestamp", "desc"))
+        const querySnapshot = await getDocs(q);
+        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
+        localStorage.setItem("storiesArray", JSON.stringify(d))
+        setStoriesArray(d)
+        setIsNewStory(false)
+        console.log("storiesArray", storiesArray)
+
+      }catch(e) {
+        console.error(e)
+      }
+    }
+
 
     useEffect(() => {
       fetchGallery()
       fetchMyPosts()
-    }, [posts === null || isNewPost === true])
+      getPosts()
+      fetchStories()
+    }, [posts === null || isNewPost === true || isNewStory === true])
 
     useEffect(() => {
       getPosts()
       fetchGallery()
       fetchMyPosts()
+      fetchStories()
       
     // SKELETON LOADER
       setTimeout(() => {
@@ -97,10 +121,13 @@ function HomePage() {
           <LeftSection />
         </div>
 
-        <div className='md:col-span-6 h-screen overflow-scroll'>
+        <div className='md:relative md:col-span-6 h-screen overflow-scroll'>
           <AddPost />
+          <StoriesSection />
           <div className='pt-3'>
             <Feed />
+            <AddStorySmall />
+            <SearchSmall />
           </div>
         </div>
 

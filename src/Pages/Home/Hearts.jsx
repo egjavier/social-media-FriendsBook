@@ -11,8 +11,8 @@ function Hearts() {
   return (
     <button className={
                         !isHeart 
-                          ? 'btn btn-ghost btn-sm w-1/2 rounded-none'
-                          : 'btn btn-ghost btn-sm w-1/2 rounded-none text-red-500'
+                          ? 'btn btn-ghost btn-sm w-1/2 rounded-none hover:bg-gray-100'
+                          : 'btn btn-ghost btn-sm w-1/2 rounded-none text-red-500 hover:bg-gray-100'
                       }
             onClick={handleHeart}>
       {
