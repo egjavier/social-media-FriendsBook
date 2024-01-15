@@ -23,7 +23,7 @@ function AddPostModal() {
     <dialog id="addPostModal" className="modal">
       <div className="modal-box">
         {/* TITLE */}
-          <div className='flex justify-between items- mb-3'>
+          <div className='flex justify-between mb-3'>
             <p className='font-semibold'>
               Create Post
             </p>

@@ -1,13 +1,13 @@
 import React from 'react'
 
-function OpenImageModal({image, post}) {
+function OpenImageModal({image}) {
 
   return (
     <dialog id="openImage" className="modal">
       <div className="modal-box">
         {/* IMAGE */}
           <img  src={image.postImage}
-                  alt={post}
+                  alt={image.postText}
                   className=''
           />
           <p className='text-start font-semibold mt-3'>

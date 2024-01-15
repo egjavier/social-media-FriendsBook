@@ -85,8 +85,6 @@ function HomePage() {
         localStorage.setItem("storiesArray", JSON.stringify(d))
         setStoriesArray(d)
         setIsNewStory(false)
-        console.log("storiesArray", storiesArray)
-
       }catch(e) {
         console.error(e)
       }
