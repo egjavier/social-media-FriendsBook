@@ -6,6 +6,7 @@ import Context from '../../Context/Context'
 function AddImagePost() {
 
   const [ postImage, setPostImage ] = useState("")
+  const [ uploadProgress, setUploadProgress ] = useState("")
 
   // CONTEXT
   const { uploadedMedia, setUploadedMedia } = useContext(Context)
@@ -19,6 +20,8 @@ function AddImagePost() {
   
         uploadTask.on('state_changed', 
           (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadProgress('Upload is ' + progress.toString().slice(0, 5) + '% done')
             switch (snapshot.state) {
               case 'running':
                 console.log('Upload is running');
@@ -58,8 +61,21 @@ function AddImagePost() {
               alt="Image to be posted" />
       </div>
 
+      {/* PROGRESS */}
+      <div className= {
+                        uploadProgress < 1 || uploadProgress === 'Upload is 100% done'
+                          ? "hidden"
+                          : 'block text-center text-xs italic font-semi-bold my-3'
+                      }>
+        {uploadProgress}
+      </div>
+
       {/* FORM */}
-      <div>
+      <div className={
+                        uploadProgress === 'Upload is 100% done'
+                          ? 'hidden'
+                          : 'my-3'
+                      }>
         <input  type='file'
                 id='uploadPhoto'
                 className='hidden'

@@ -71,8 +71,16 @@ function PostBtn() {
   }
 
   return (
-      <button className='mt-3 btn btn-block btn-sm bg-[#2351A7]/90 text-white tracking-wider
-                        hover:bg-[#2351A7]'
+      <button className={
+                          uploadedMedia !== ""
+                          ? 'mt-3 btn btn-block btn-sm bg-[#2351A7]/90 text-white tracking-wider hover:bg-[#2351A7]'
+                          : 'mt-3 btn btn-block btn-sm btn-disabled tracking-wider'
+                        }
+      
+      
+      
+      
+      
               onClick={handlePost}>
         Post
       </button>  
