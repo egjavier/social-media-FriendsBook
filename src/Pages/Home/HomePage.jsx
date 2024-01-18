@@ -9,6 +9,8 @@ import db from '../../Config/FirebaseConfig'
 import AddStorySmall from './Stories/AddStorySmall'
 import SearchSmall from './SearchSmall'
 import StoriesSection from './Stories/StoriesSection'
+import AddStoryModal from './Stories/AddStoryModal'
+import SearchModal from './Left/SearchModal'
 
 function HomePage() {
 
@@ -24,7 +26,8 @@ function HomePage() {
           setMyGallery,
           isNewPost, setIsNewPost,
           storiesArray, setStoriesArray,
-          isNewStory, setIsNewStory
+          isNewStory, setIsNewStory,
+          allUsers, setAllUsers
         } = useContext(Context)
 
     // FETCH POSTS
@@ -90,12 +93,25 @@ function HomePage() {
       }
     }
 
+    // FETCH ALL USERS
+    const fetchAllUsers = async () => {
+      try {
+          const q = query(collection(db, "users"))
+          const querySnapshot = await getDocs(q);
+          const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
+          localStorage.setItem("allUsers", JSON.stringify(d))
+          setAllUsers(d)
+      }catch(e) {
+        console.error(e)
+      }
+    }
 
     useEffect(() => {
       fetchGallery()
       fetchMyPosts()
       getPosts()
       fetchStories()
+      fetchAllUsers()
     }, [posts === null || isNewPost === true || isNewStory === true])
 
     useEffect(() => {
@@ -103,6 +119,9 @@ function HomePage() {
       fetchGallery()
       fetchMyPosts()
       fetchStories()
+      fetchAllUsers()
+      localStorage.removeItem('profilepagePosts')
+      localStorage.removeItem('profileGallery')
       
     // SKELETON LOADER
       setTimeout(() => {
@@ -112,7 +131,7 @@ function HomePage() {
 
 
  return (
-    <section className='profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 my-5'>
+    <section className='relatie profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 my-5'>
       <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2'>
 
         <div className='hidden md:block col-span-3'>
@@ -134,6 +153,9 @@ function HomePage() {
         </div>
 
       </div>  
+
+      <AddStoryModal />
+      <SearchModal />
     </section>
   )
 }

@@ -1,27 +1,42 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
+import { useParams } from 'react-router-dom'
+
 
 function ProfileImage() {
 
   const [ isLoading, setIsLoading ] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 5000)
-  }, [])
-
+  const [ user, setUser ] = useState("")
 
   // CONTEXT
-  const { userInfo } = useContext(Context)
+  const { 
+          allUsers, 
+        } = useContext(Context)
+  const { id } = useParams()
+
+  // GET USER
+  const getUser = () => {
+    allUsers.map(u => {
+      if(u.userId === id) {
+        setUser(u)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getUser()
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+  }, [])
 
   return (
     <>
     {
       isLoading
         ? <div className='skeleton w-48 h-48 rounded-full border-4 border-white'></div>
-        :  <img src={userInfo.profilePhoto}
-                alt={userInfo.username} 
+        :  <img src={user.profilePhoto}
+                alt={user.username} 
                 className='w-48 h-48 rounded-full object-cover border-4 border-white'
           />
     }          

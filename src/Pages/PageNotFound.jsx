@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from './Footer'
 import { useNavigate } from 'react-router-dom'
 import HomeIcon from '@heroicons/react/24/solid/HomeIcon'
@@ -7,6 +7,11 @@ function PageNotFound() {
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    localStorage.removeItem('profilepagePosts')
+    localStorage.removeItem('profileGallery')
+  }, [])
+  
   return (
     <section className='flex flex-col justify-between bg-[#AACEFE]/50'>
       <div className='flex flex-col justify-center items-center h-screen gap-4 border shadow'>

@@ -27,6 +27,7 @@ function PostBtn() {
           privacy: postPrivacy,
           postText: postText,
           postImage: uploadedMedia,
+          userId: userInfo.userId
         })
         
         if(uploadedMedia !== "") {
@@ -40,6 +41,7 @@ function PostBtn() {
               privacy: postPrivacy,
               postText: postText,
               postImage: uploadedMedia,
+              userId: userInfo.userId
             })
           }
 
@@ -72,15 +74,10 @@ function PostBtn() {
 
   return (
       <button className={
-                          uploadedMedia !== ""
+                          uploadedMedia !== "" || postText !== ""
                           ? 'mt-3 btn btn-block btn-sm bg-[#2351A7]/90 text-white tracking-wider hover:bg-[#2351A7]'
                           : 'mt-3 btn btn-block btn-sm btn-disabled tracking-wider'
                         }
-      
-      
-      
-      
-      
               onClick={handlePost}>
         Post
       </button>  

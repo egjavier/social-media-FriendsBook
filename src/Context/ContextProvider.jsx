@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Context from './Context'
 
 function ContextProvider({children}) {
@@ -30,6 +30,21 @@ function ContextProvider({children}) {
 
   const storedStoriesArray = () => {
     const d = localStorage.getItem("storiesArray") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedAllUsers = () => {
+    const d = localStorage.getItem("allUsers") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedProfilepagePosts = () => {
+    const d = localStorage.getItem("profilepagePosts") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedProfileGallery = () => {
+    const d = localStorage.getItem("profileGallery") 
     return d ? JSON.parse(d) : []
   }
 
@@ -68,6 +83,11 @@ function ContextProvider({children}) {
   const [ storyName, setStoryName ] = useState("")
   const [ isNewStory, setIsNewStory ] = useState(false)
   const [ storiesArray, setStoriesArray]  = useState(storedStoriesArray)
+  // ALL USERS
+  const [ allUsers, setAllUsers ] = useState(storedAllUsers)
+  // PROFILE PAGE POSTS AND GALLERY
+  const [ profilepagePosts, setProfilepagePosts ] = useState(storedProfilepagePosts)
+  const [ profileGallery, setProfileGallery ] = useState(storedProfileGallery)
 
   return (
     <Context.Provider value={{
@@ -103,7 +123,12 @@ function ContextProvider({children}) {
                               storyName, setStoryName,
                               storyUrl, setStoryUrl,
                               storiesArray, setStoriesArray,
-                              isNewStory, setIsNewStory
+                              isNewStory, setIsNewStory,
+                              // ALL USERS
+                              allUsers, setAllUsers,
+                              // PROFILE PAGE POSTS AND GALLERY
+                              profilepagePosts, setProfilepagePosts,
+                              profileGallery, setProfileGallery
                             }}>
     {children}
   </Context.Provider>

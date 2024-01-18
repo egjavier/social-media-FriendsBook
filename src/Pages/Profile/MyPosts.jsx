@@ -7,8 +7,9 @@ function MyPosts() {
   // CONTEXT
   const { 
           myPostsArray, setMyPostsArray, 
+          profilepagePosts, setProfilepagePosts,
           postsArray,
-          userInfo
+          userInfo,
         } = useContext(Context)
 
   const [ isLoading, setIsLoading ] = useState(true)
@@ -17,7 +18,7 @@ function MyPosts() {
     useEffect(() => {
       setTimeout(() => {
         setIsLoading(false)
-      }, 5000)
+      }, 3000)
     }, [])
 
   return (
@@ -25,9 +26,9 @@ function MyPosts() {
       {
         isLoading
           ? <FeedSkeleton />
-          :  myPostsArray.length < 1
+          :  profilepagePosts.length < 1
               ? <div className='w-full text-center text-sm text-gray-400 italic mt-5'>No post yet.</div>
-              :  myPostsArray.map(e => {
+              :  profilepagePosts.map(e => {
                   return (
                     <div className='border bg-white flex flex-col gap-4 my-5 rounded-xl p-3'
                           key={e.id}>

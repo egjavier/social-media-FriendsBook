@@ -1,5 +1,4 @@
 import React from 'react'
-import AddStoryModal from '../Stories/AddStoryModal'
 
 function AddStoryHomepage() {
   return (
@@ -12,11 +11,10 @@ function AddStoryHomepage() {
       </button>
       <button className='btn btn-sm col-span-1 rounded-e-xl rounded-s-none border-e border-[#2351A7]
                          bg-white text-[#2351A7] font-bold tracking-wide text-xs lg:text-sm
-                         hover:bg-[#2351A7] hover:text-white'>
+                         hover:bg-[#2351A7] hover:text-white'
+              onClick={() => {document.getElementById('search').showModal()}}>
         Search
       </button>
-
-      <AddStoryModal />
     </div>
   )
 }

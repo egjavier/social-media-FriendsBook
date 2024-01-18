@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
 import Hearts from './Hearts'
 import FeedSkeleton from '../../Components/FeedSkeleton'
+import { useNavigate } from 'react-router-dom'
 
 function Feed() {
 
   const [ isLoading, setIsLoading ] = useState(true)
+  const navigate = useNavigate()
 
   // // CONTEXT
   const { 
@@ -35,7 +37,10 @@ function Feed() {
                           className='w-16 h-16 rounded-full object-cover col-span-2'
                     />
                       <div className='flex flex-col'>
-                        <p className='text-lg font-semibold text-slate-800'>
+                        <p className='text-lg font-semibold text-slate-800 cursor-pointer'
+                            onClick={() => {
+                              navigate(`/${e.userId}`)
+                              }}>
                           {e.firstname} {e.lastname}
                         </p> 
                         <small>

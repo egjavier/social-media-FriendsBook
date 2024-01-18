@@ -1,10 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
+import { useParams } from 'react-router-dom'
 
 function ProfileName() {
 
+  const [ user, setUser ] = useState("")
+
   // CONTEXT
-  const { userInfo } = useContext(Context)
+  const { 
+          allUsers, 
+        } = useContext(Context)
+  const { id } = useParams()
+
+  // GET USER
+  const getUser = () => {
+    allUsers.map(u => {
+      if(u.userId === id) {
+        setUser(u)
+      }
+    })
+  }
+
+  useEffect(() =>{
+    getUser()
+  }, [])
 
   return (
     <>
@@ -13,10 +32,10 @@ function ProfileName() {
 
         <div className='col-span-6 text-center'>
           <p className='font-bold text-3xl tracking-wide'>
-            {userInfo.firstname} {userInfo.lastname}
+            {user.firstname} {user.lastname}
           </p>
           <small className='text-sm text-gray-600 italic'>
-            {userInfo.displayName}
+            {user.displayName}
           </small>
         </div>
 

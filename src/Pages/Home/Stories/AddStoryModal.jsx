@@ -91,7 +91,7 @@ function AddStoryModal() {
     }
 
   return (
-    <dialog id="addStoryModal" className="modal">
+    <dialog id="addStoryModal" className="modal modal-middle">
       <div className="modal-box">
         {/* TITLE */}
           <div className='flex justify-between items- mb-3'>

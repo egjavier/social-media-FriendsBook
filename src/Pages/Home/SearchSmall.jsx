@@ -2,7 +2,8 @@ import React from 'react'
 
 function SearchSmall() {
   return (
-    <div className='md:hidden absolute top-[79vh] right-5 z-[20] bg-white rounded-full cursor-pointer'>
+    <div className='md:hidden absolute top-[79vh] right-5 z-[20] bg-white rounded-full cursor-pointer'
+          onClick={() => {document.getElementById('search').showModal()}}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2351A7" 
             className="w-14 h-14 hover:scale-110 duration-300">
         <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />

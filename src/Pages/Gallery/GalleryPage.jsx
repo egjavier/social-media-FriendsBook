@@ -29,11 +29,16 @@ function GalleryPage() {
   }
 
   useEffect(() => {
-    fetch()
+    // FETCH GALLERY
+      fetch()
+    
+    localStorage.removeItem('profilepagePosts')
+    localStorage.removeItem('profileGallery')
+
     // SKELETON LOADER
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 5000)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 5000)
   }, [])
 
 return (

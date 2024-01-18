@@ -1,21 +1,40 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ThumbnailModal from './ThumbnailModal'
 import Context from '../../Context/Context'
+import { useParams } from 'react-router-dom'
 
 function Thumbnail() {
 
+  const [ user, setUser ] = useState("")
+
   // CONTEXT
-  const { userInfo } = useContext(Context)
+  const { 
+          allUsers, 
+        } = useContext(Context)
+  const { id } = useParams()
+
+  // GET USER
+  const getUser = () => {
+    allUsers.map(u => {
+      if(u.userId === id) {
+        setUser(u)
+      }
+    })
+  }
+
+  useEffect(() =>{
+    getUser()
+  }, [])
 
   return (
-    <div className='bg-gray-300 h-[400px] w-full flex justify-center items-center'
+    <div className='bg-gray-300 h-[400px] w-full flex justify-center items-center cursor-pointer'
           onClick={() => {
             document.getElementById('thumbnailModal').showModal()
           }}>
 
       {
-        userInfo.thumbnail !== ""
-        ? <img  src={userInfo.thumbnail} 
+        user.thumbnail !== ""
+        ? <img  src={user.thumbnail} 
                 alt="Thumbnail" 
                 className='w-full h-full object-cover'/>
         :  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-20 h-20 text-gray-400">
