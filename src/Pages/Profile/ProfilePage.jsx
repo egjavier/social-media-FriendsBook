@@ -8,6 +8,7 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import Context from '../../Context/Context'
 import { useParams } from 'react-router-dom'
+import ListOfUsers from './Right/ListOfUsers'
 
 function ProfilePage() {
 
@@ -18,7 +19,7 @@ function ProfilePage() {
       profilepagePosts, setProfilepagePosts,
       postsArray, setPostsArray,
       galleryArray,
-      profileGallery, setProfileGallery
+      profileGallery, setProfileGallery,
     } =  useContext(Context)
 
     // FETCH POSTS
@@ -80,7 +81,9 @@ function ProfilePage() {
         <div className='md:col-span-6 overflow-y-scroll'>
           <MyPosts />
         </div>
-        <div className='hidden md:block bg-pink-300 col-span-3'>chat</div>
+        <div className='hidden md:block col-span-3'>
+          <ListOfUsers />
+        </div>
       </div>
     </section>
   )
