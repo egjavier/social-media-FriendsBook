@@ -4,7 +4,7 @@ import Feed from './Feed'
 import LeftSection from './Left/LeftSection'
 import RightSection from './Right/RightSection'
 import Context from '../../Context/Context'
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
+import { collection, getDocs, query, orderBy, doc, deleteDoc } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import AddStorySmall from './Stories/AddStorySmall'
 import SearchSmall from './SearchSmall'
@@ -85,14 +85,33 @@ function HomePage() {
       try{
         const q = query(collection(db, "stories"), orderBy("timestamp", "desc"))
         const querySnapshot = await getDocs(q);
-        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
-        localStorage.setItem("storiesArray", JSON.stringify(d))
-        setStoriesArray(d)
+        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))     
+        
+        // REMOVE STORY
+        d.map(story => {
+          const hour = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 18)
+          const min = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(19, 21)
+          const time = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 21)
+          console.log(time, `00:${Number(min) + 1}`)
+
+          if( (hour < 24 && `${Number(hour) + 1}:${Number(min) + 1}`) || (hour === 24 && `00:${Number(min) + 1}`) ) {
+            // DELETE STORY DROM COLLECTION
+            deleteDoc(doc(db, "stories", story.id))
+            localStorage.setItem("storiesArray", JSON.stringify(d))
+            setStoriesArray(d)
+          } else {
+            localStorage.setItem("storiesArray", JSON.stringify(d))
+            setStoriesArray(d)
+          }
+        })
+          
         setIsNewStory(false)
       }catch(e) {
         console.error(e)
       }
     }
+
+
 
     // FETCH ALL USERS
     const fetchAllUsers = async () => {

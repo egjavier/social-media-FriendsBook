@@ -2,7 +2,7 @@ import React from 'react'
 
 function StoryModal({storyInfo}) {
 
-  return (
+ return (
     <dialog id="storyModal" className="modal">
       {
         storyInfo.timestamp !== undefined &&
