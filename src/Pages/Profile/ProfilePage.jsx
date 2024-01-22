@@ -8,7 +8,6 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import Context from '../../Context/Context'
 import { useParams } from 'react-router-dom'
-import AddStoryModal from '../Home/Stories/AddStoryModal'
 
 function ProfilePage() {
 
@@ -74,10 +73,6 @@ function ProfilePage() {
         </div>
       </div>
 
-      <div>
-        {/* searchbar */}
-      </div>
-
       <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2 h-screen'>
         <div className='hidden md:block col-span-3'>
           <ProfileGalleryPreview />
@@ -87,8 +82,6 @@ function ProfilePage() {
         </div>
         <div className='hidden md:block bg-pink-300 col-span-3'>chat</div>
       </div>
-
-      <AddStoryModal />
     </section>
   )
 }

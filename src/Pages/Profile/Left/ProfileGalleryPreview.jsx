@@ -8,12 +8,16 @@ function profileGalleryPreview() {
 
   // CONTEXT
   const {
-          profileGallery
+          profileGallery,
+          isUpdated, setIsUpdated
         } = useContext(Context)
 
 
   // SKELETON
   useEffect(() => {
+    if(isUpdated === true) {
+      location.reload()
+    }
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)

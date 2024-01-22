@@ -84,7 +84,8 @@ function SearchModal() {
               searchFilter !== "" &&
               searchedUser.map(user => {
                 return(
-                  <div className='my-2 flex justify-start items-center gap-5'>
+                  <div className='my-2 flex justify-start items-center gap-5'
+                        key={user.userId}>
                     {/* image */}
                     <img src={user.profilePhoto}
                             alt ={user.displayName}

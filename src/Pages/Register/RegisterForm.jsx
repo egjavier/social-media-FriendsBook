@@ -53,7 +53,6 @@ function RegisterForm() {
       handleUploadProfilePhoto() 
     }, [profilePhoto])
 
-    console.log("profilePhoto", profilePhoto)
   
   return (
     <div className='border-b border-slate-700 pb-4 px-5'>

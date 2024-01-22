@@ -3,16 +3,80 @@ import Context from '../../Context/Context'
 import Hearts from './Hearts'
 import FeedSkeleton from '../../Components/FeedSkeleton'
 import { useNavigate } from 'react-router-dom'
+import { doc, deleteDoc, collection, getDocs, query, orderBy } from "firebase/firestore"
+import db from '../../Config/FirebaseConfig'
+import EditPostModal from './EditPostModal'
 
 function Feed() {
 
   const [ isLoading, setIsLoading ] = useState(true)
+  const [ postInfo, setPostInfo ] = useState({})
   const navigate = useNavigate()
 
-  // // CONTEXT
+  // CONTEXT
   const { 
+          userInfo,
           postsArray, setPostsArray,
+          myGallery,
+          setGalleryArray, setMyGallery,
+          galleryArray, setMyPostsArray,
+          setPostTextEdit
         } = useContext(Context)
+
+  // FETCH POSTS
+  const getPosts = async () => {
+    try {
+        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"))
+        const querySnapshot = await getDocs(q);
+        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
+        localStorage.setItem("postsArray", JSON.stringify(d))
+        setPostsArray(d)
+
+        // MY POSTS
+        const array = []
+        d.forEach(post => {
+          post.email === userInfo.email && array.push(post)
+          localStorage.setItem("myPostsArray", JSON.stringify(array))
+          setMyPostsArray(array)
+        })
+
+        // MY GALLERY
+        const arr = []
+        const r = query(collection(db, "gallery"), orderBy("timestamp", "desc"))
+        const qs = await getDocs(r);
+        const e = qs.docs.map( f => ({...f.data(), id: f.id}))
+        e.forEach(image => {
+          image.email === userInfo.email && arr.push(image)
+          localStorage.setItem("myGallery", JSON.stringify(arr))
+          setMyGallery(array)
+        })
+
+    }catch(e) {
+      console.error(e)
+    }
+  }
+
+  // DELETE POST
+  const handleDeletePost = async (e) => {
+    // CONFIRMATION
+    if (confirm("Are you sure you want to delete this post?")) {
+      
+      // DELETE POST FROM COLLECTION
+        await deleteDoc(doc(db, "posts", e.id))
+
+      // DELETE IMAGE FROM COLLECTION
+        myGallery.forEach(image => {
+          image.postImage === e.postImage && deleteDoc(doc(db, "gallery", image.id))
+        })
+
+      // FETCH DATA
+        getPosts()
+
+      alert('Post have been deleted succesfully')
+    } else {
+      alert('NO changes made.')
+    }
+  }
 
     useEffect(() => {
     // SKELETON LOADER
@@ -31,11 +95,12 @@ function Feed() {
                 <div className='border bg-white flex flex-col gap-4 my-5 rounded-xl p-3'
                       key={e.id}>
                   {/* TITLE */}
-                  <div className='flex gap-5'>
-                    <img src={e.profilePhoto} 
-                          alt={e.displayName + "Profile Photo"}
-                          className='w-16 h-16 rounded-full object-cover col-span-2'
-                    />
+                  <div className='flex justify-between gap-5'>
+                    <div className='flex gap-5'>
+                      <img src={e.profilePhoto} 
+                            alt={e.displayName + "Profile Photo"}
+                            className='w-16 h-16 rounded-full object-cover col-span-2'
+                      />
                       <div className='flex flex-col'>
                         <p className='text-lg font-semibold text-slate-800 cursor-pointer'
                             onClick={() => {
@@ -50,6 +115,30 @@ function Feed() {
                           {new Date(e.timestamp.seconds * 1000 + e.timestamp.nanoseconds / 1000000).toString().slice(0, 21)}
                         </small>
                       </div>
+
+                    </div>
+                    <div className= {
+                                      e.email === userInfo.email 
+                                        ? 'block'
+                                        : "hidden"
+                                    }>
+                      <details className="dropdown dropdown-bottom dropdown-end">
+                        <summary className="text-2xl cursor-pointer w-8 h-8 flex justify-center items-center 
+                                            rounded-full pt-0 hover:shadow-xl hover:scale-110 duration-150">
+                          :
+                        </summary>
+                        <ul className="shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-fit text-xs">
+                          <li onClick={() =>  {
+                                                setPostTextEdit(e.postText)
+                                                setPostInfo(e)
+                                                document.getElementById('editPost').showModal()
+                                              }}>
+                            <a>Edit</a>
+                          </li>
+                          <li onClick={() => {handleDeletePost(e)}}><a>Delete</a></li>
+                        </ul>
+                      </details>
+                    </div>
                   </div>
 
                     {/* POST */}
@@ -71,7 +160,7 @@ function Feed() {
 
                     {/* COMMENT */}
                     <div className='flex border-y'>
-                      <Hearts />
+                      <Hearts e={e} />
                       <button className='btn btn-ghost btn-sm w-1/2 rounded-none  hover:bg-gray-100'>
                         Comments
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -85,6 +174,7 @@ function Feed() {
                       Comment Placeholder
                     </div>
 
+                    <EditPostModal e={postInfo} />
                 </div>
               )
               })

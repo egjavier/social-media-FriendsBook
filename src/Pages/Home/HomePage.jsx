@@ -27,7 +27,8 @@ function HomePage() {
           isNewPost, setIsNewPost,
           storiesArray, setStoriesArray,
           isNewStory, setIsNewStory,
-          allUsers, setAllUsers
+          allUsers, setAllUsers,
+          updated, setUpdated
         } = useContext(Context)
 
     // FETCH POSTS

@@ -3,13 +3,14 @@ import Context from '../../Context/Context'
 import { doc, updateDoc, getDocs, collection } from "firebase/firestore"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import db, { storage } from '../../Config/FirebaseConfig'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function ThumbnailModal() {
 
   const [ isUpdated, setIsUpdated ] = useState(false)
   const [ uploadProgress, setUploadProgress ] = useState("")
   const [ thumbnailImage, setThumbnailImage ] = useState("")
+  const { id } = useParams()
   
   const navigate = useNavigate()
 
@@ -47,7 +48,6 @@ function ThumbnailModal() {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               console.log('File available at', downloadURL);
               setUploadedThumbnail(downloadURL)
-              console.log("thum")
             });
           }
         );
@@ -60,7 +60,7 @@ function ThumbnailModal() {
   // SAVE THUMBNAIL
   const handleSaveThumbnail = async() => {
     try{
-      if(thumbnailImage !== "") {
+      if(thumbnailImage !== "" && userInfo.userId === id) {
         const thumbnailRef = doc(db, "users", userInfo.id)
         await updateDoc(thumbnailRef, {
           thumbnail: uploadedThumbnail
@@ -69,7 +69,7 @@ function ThumbnailModal() {
         fetch()
 
       }else {
-        alert("Image should not be empty!")
+        alert("Either there's no image to upload or You don't have access to this account.")
       }
     }catch(e){
       console.error(e)

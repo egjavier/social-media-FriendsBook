@@ -88,6 +88,9 @@ function ContextProvider({children}) {
   // PROFILE PAGE POSTS AND GALLERY
   const [ profilepagePosts, setProfilepagePosts ] = useState(storedProfilepagePosts)
   const [ profileGallery, setProfileGallery ] = useState(storedProfileGallery)
+  // EDIT POST
+  const [ postTextEdit, setPostTextEdit ] = useState("")
+  const [ isUpdated, setIsUpdated ] = useState(false)
 
   return (
     <Context.Provider value={{
@@ -128,7 +131,10 @@ function ContextProvider({children}) {
                               allUsers, setAllUsers,
                               // PROFILE PAGE POSTS AND GALLERY
                               profilepagePosts, setProfilepagePosts,
-                              profileGallery, setProfileGallery
+                              profileGallery, setProfileGallery,
+                              // EDIT POST
+                              postTextEdit, setPostTextEdit,
+                              isUpdated, setIsUpdated                               
                             }}>
     {children}
   </Context.Provider>
