@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
-import Hearts from './Hearts'
 import FeedSkeleton from '../../Components/FeedSkeleton'
 import { useNavigate } from 'react-router-dom'
 import { doc, deleteDoc, collection, getDocs, query, orderBy } from "firebase/firestore"
