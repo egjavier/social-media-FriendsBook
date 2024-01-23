@@ -1,83 +1,73 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { doc, setDoc, getDocs  } from "firebase/firestore"
+import { doc, setDoc, getDoc, } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import Context from '../../Context/Context'
 
-function Hearts({e}) {
+function Hearts({postInfo}) {
 
   // CONTEXT
   const {
-          userInfo    
+          userInfo, 
+          hearts   
         } = useContext(Context)
 
   const [ isHeart, setIsHeart ] = useState(false)
+  const [ fill, setFill ] = useState(false)
   const [ heartCount, setHeartCount ] = useState(0)
+  const [ isAdded, setIsAdded ] = useState(false)
   const [ newHeart, setNewHeart ] = useState(false)
-  const [ whoClickedHeart, setWhoClickedHeart ] = useState([])
+  const [ byWho, setByWho ] = useState("")
 
   // CHANGE STATE
   const handleHeart = () => {
     setIsHeart(!isHeart)
     setNewHeart(true)
   }
-
-  // HEART COUNTER LOGIC
-  const handleHeartCounter = () => {
-    if(isHeart === true) {
-      // ADD TO HEARTCOUNTER
-        let count = 0
-        count ++
-        setHeartCount(count)
-      // ADD USER WHO CLICKED HEART
-        let array = []
-        array.push(userInfo.displayName)
-        setWhoClickedHeart(array)
-
-    } else {
-      // MINUS TO HEART COUNTER
-        let count = 0
-        count > 0 && count --
-        setHeartCount(count)
-      // REMOVE USER WHO UNHEART
-        let array = []
-        array = array.filter(user => user !== userInfo.displayName)
-        setWhoClickedHeart(array)
+    
+  // ADD COUNT 
+  const addCount = () => {
+    if (isHeart === true ) {
+      setHeartCount(heartCount + 1)
+    } else if (isHeart === false && heartCount > 0) {
+      setHeartCount(heartCount - 1)
     }
-  }
 
-  // HEARTS COLLECTION
-  const heartsCollection = async () => {
-    // ADD TO THE HEARTS COLLECTION
-    await setDoc(doc(db, "hearts", e.id), {
-      heartCount: heartCount,
-      whoClickedHeart: whoClickedHeart,
-      postId: e.id
+    // console.log("postInfo.id", postInfo.id)
+    hearts.map(e => {
+      e.id === postInfo.id && setFill(true)
     })
   }
 
-  // FETCH HEART COLLECTION
-  const fetchHeartCollection = async () => {
-    try {
-      const q = query(collection(db, "hearts"))
-      const querySnapshot = await getDocs(q);
-      const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))
-      console.log("d", d)
-    }catch(e) {
+  // ADD HEARTS TO COLLECTION
+  const addData =  async () => {
+    try{
+
+      // add data
+      postInfo.id !== undefined &&
+        await setDoc(doc(db, "hearts", postInfo.id), {
+          heartCount: heartCount,
+          byWho: userInfo.displayName
+        })
+        setIsAdded(true)
+    } catch(e){
       console.error(e)
     }
   }
 
   useEffect(() => {
-    handleHeartCounter()
-    // heartsCollection()
+    addData()
     setNewHeart(false)
-  }, [newHeart === true])
+  }, [newHeart])
+ 
+  useEffect(() => {
+    addCount()
+  }, [isHeart])
 
   return (
     <button className={
-                        isHeart === false && heartCount < 1
-                          ? 'btn btn-ghost btn-sm w-1/2 rounded-none hover:bg-gray-100'
-                          : 'btn btn-ghost btn-sm w-1/2 rounded-none text-red-500 hover:bg-gray-100'
+                        isHeart === false && fill === false
+                          ? 'btn btn-ghost btn-sm w-full rounded-none hover:bg-gray-100'
+                          : 'btn btn-ghost btn-sm w-full rounded-none text-red-500 hover:bg-gray-100'
                       }
             onClick={handleHeart}>
       {

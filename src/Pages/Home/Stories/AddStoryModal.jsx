@@ -61,34 +61,34 @@ function AddStoryModal() {
     handleAddStory()
   }, [storyName])
 
-  // ADD STORY BUTTON
-    const handleAddStoryBtn = async() => {
-      try {
-        if(storyUrl !== "") {
-          addDoc(collection(db, "stories"), {
-            firstname: userInfo.firstname,
-            lastname: userInfo.lastname,
-            displayName: userInfo.displayName,
-            email: userInfo.email,
-            profilePhoto: userInfo.profilePhoto,
-            timestamp: Timestamp.fromDate(new Date()),
-            storyUrl: storyUrl
-          })
+// ADD STORY BUTTON
+const handleAddStoryBtn = async() => {
+  try {
+    if(storyUrl !== "") {
+      addDoc(collection(db, "stories"), {
+        firstname: userInfo.firstname,
+        lastname: userInfo.lastname,
+        displayName: userInfo.displayName,
+        email: userInfo.email,
+        profilePhoto: userInfo.profilePhoto,
+        timestamp: Timestamp.fromDate(new Date()),
+        storyUrl: storyUrl
+      })
 
-          setIsNewStory(true)
-        }
-
-        alert('Upload Successsful!')
-        document.getElementById('addStoryModal').close()
-
-        // EMPTY FIELDS
-        setStoryUrl("")
-        setStoryName("")
-        setUploadProgress("")
-      }catch(e) {
-        console.error(e)
-      }
+      setIsNewStory(true)
     }
+
+    alert('Upload Successsful!')
+    document.getElementById('addStoryModal').close()
+
+    // EMPTY FIELDS
+    setStoryUrl("")
+    setStoryName("")
+    setUploadProgress("")
+  }catch(e) {
+    console.error(e)
+  }
+}
 
   return (
     <dialog id="addStoryModal" className="modal modal-middle">

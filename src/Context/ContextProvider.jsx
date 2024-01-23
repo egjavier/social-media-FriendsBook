@@ -48,6 +48,16 @@ function ContextProvider({children}) {
     return d ? JSON.parse(d) : []
   }
 
+  const storedAllCommentsArray = () => {
+    const d = localStorage.getItem("allComments") 
+    return d ? JSON.parse(d) : []
+  }
+
+  const storedMyComs = () => {
+    const d = localStorage.getItem("myComs") 
+    return d ? JSON.parse(d) : []
+  }
+
   const [ userInfo, setUserInfo ] = useState(storedUserInfo)
   // REGISTER
   const [ firstname, setFirstName ] = useState("")
@@ -91,6 +101,10 @@ function ContextProvider({children}) {
   // EDIT POST
   const [ postTextEdit, setPostTextEdit ] = useState("")
   const [ isUpdated, setIsUpdated ] = useState(false)
+  // COMMENTS
+  const [ allComments, setAllComments ] = useState(storedAllCommentsArray)
+  const [ myComs, setMyComs ] = useState(storedMyComs)
+
 
   return (
     <Context.Provider value={{
@@ -134,7 +148,10 @@ function ContextProvider({children}) {
                               profileGallery, setProfileGallery,
                               // EDIT POST
                               postTextEdit, setPostTextEdit,
-                              isUpdated, setIsUpdated                               
+                              isUpdated, setIsUpdated,
+                              // COMMENTS
+                              allComments, setAllComments,
+                              myComs, setMyComs                        
                             }}>
     {children}
   </Context.Provider>

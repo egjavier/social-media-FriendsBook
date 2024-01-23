@@ -11,6 +11,7 @@ import SearchSmall from './SearchSmall'
 import StoriesSection from './Stories/StoriesSection'
 import AddStoryModal from './Stories/AddStoryModal'
 import SearchModal from './Left/SearchModal'
+import CommentModal from './CommentModal'
 
 function HomePage() {
 
@@ -28,7 +29,8 @@ function HomePage() {
           storiesArray, setStoriesArray,
           isNewStory, setIsNewStory,
           allUsers, setAllUsers,
-          updated, setUpdated
+          updated, setUpdated,
+          allComments, setAllComments
         } = useContext(Context)
 
     // FETCH POSTS
@@ -69,12 +71,14 @@ function HomePage() {
     // MY POSTS
     const fetchMyPosts = async () => {
       try{
-        const array = []
-        posts.forEach(post => {
-          post.email === userInfo.email && array.push(post)
-          localStorage.setItem("myPostsArray", JSON.stringify(array))
-          setMyPostsArray(array)
-        })
+        if(posts !== null) {
+          const array = []
+          posts.forEach(post => {
+            post.email === userInfo.email && array.push(post)
+            localStorage.setItem("myPostsArray", JSON.stringify(array))
+            setMyPostsArray(array)
+          })
+        }
       }catch(error) {
         console.error(error)
       }
@@ -85,33 +89,34 @@ function HomePage() {
       try{
         const q = query(collection(db, "stories"), orderBy("timestamp", "desc"))
         const querySnapshot = await getDocs(q);
-        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))     
+        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))  
+        localStorage.setItem("storiesArray", JSON.stringify(d))
+        setStoriesArray(d)   
         
-        // REMOVE STORY
-        d.map(story => {
-          const hour = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 18)
-          const min = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(19, 21)
-          const time = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 21)
-          console.log(time, `00:${Number(min) + 1}`)
+        // // REMOVE STORY
+        // d.map(story => {
+        //   const date = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(13, 15)
+        //   const hour = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 18)
+        //   const min = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(19, 21)
+        //   const time = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 21)
+        //   console.log(`${Number(date) + 1} ${Number(hour) + 1}:${Number(min) + 1}`)
 
-          if( (hour < 24 && `${Number(hour) + 1}:${Number(min) + 1}`) || (hour === 24 && `00:${Number(min) + 1}`) ) {
-            // DELETE STORY DROM COLLECTION
-            deleteDoc(doc(db, "stories", story.id))
-            localStorage.setItem("storiesArray", JSON.stringify(d))
-            setStoriesArray(d)
-          } else {
-            localStorage.setItem("storiesArray", JSON.stringify(d))
-            setStoriesArray(d)
-          }
-        })
+        //   if( (hour < 24 && `${Number(date) + 1} ${Number(hour) + 1}:${Number(min) + 1}`) || (hour === 24 && `${Number(date) + 1} 00:${Number(min) + 1}`) ) {
+        //     // DELETE STORY FROM COLLECTION
+        //     deleteDoc(doc(db, "stories", story.id))
+        //     localStorage.setItem("storiesArray", JSON.stringify(d))
+        //     setStoriesArray(d)
+        //   } else {
+        //     localStorage.setItem("storiesArray", JSON.stringify(d))
+        //     setStoriesArray(d)
+        //   }
+        // })
           
         setIsNewStory(false)
       }catch(e) {
         console.error(e)
       }
     }
-
-
 
     // FETCH ALL USERS
     const fetchAllUsers = async () => {
@@ -126,12 +131,27 @@ function HomePage() {
       }
     }
 
+     // FETCH COMMENTS FROM FIREBASE
+    const fetchComments = async () => {
+      try{
+        const r = query(collection(db, "comments"), orderBy("timestamp", "desc"))
+        const qs = await getDocs(r);
+        const e = qs.docs.map( f => ({...f.data()}))
+        localStorage.setItem('allComments',JSON.stringify(e))
+        setAllComments(e)
+
+        }catch(e) {
+        console.error(e)
+      }
+    }
+
     useEffect(() => {
       fetchGallery()
       fetchMyPosts()
       getPosts()
       fetchStories()
       fetchAllUsers()
+      fetchComments()
     }, [posts === null || isNewPost === true || isNewStory === true])
 
     useEffect(() => {
@@ -140,6 +160,7 @@ function HomePage() {
       fetchMyPosts()
       fetchStories()
       fetchAllUsers()
+      fetchComments()
       localStorage.removeItem('profilepagePosts')
       localStorage.removeItem('profileGallery')
       
@@ -176,6 +197,7 @@ function HomePage() {
 
       <AddStoryModal />
       <SearchModal />
+      {/* <CommentModal /> */}
     </section>
   )
 }
