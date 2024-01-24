@@ -195,11 +195,6 @@ function MyPosts() {
                           </button>
                         </div>
 
-                        {/*  */}
-                        <div>
-                          Comment Placeholder
-                        </div>
-
                         <EditPostModal e={postInfo} />
                         <CommentModal e={postInfo} />
                     </div>
