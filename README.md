@@ -50,6 +50,7 @@ Created a user-friendly interface for account creation and login.
     I utilized Tailwind CSS and Daisy UI for modals and additional design enhancements in FriendsBook, ensuring a clean and stylish user interface.
 
 **Utilized React Hooks for State Management**
+
     **useState()** for managing variables throughout the page.
     **useEffect()** to prevent unnecessary re-renders.
     **useContext()** to access data from other components.
