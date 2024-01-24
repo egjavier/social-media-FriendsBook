@@ -11,7 +11,7 @@ function Logo() {
       <img  src={logo} 
             alt="FriendsBook Logo" 
             title='FriendsBook'
-            className='md:hidden cursor-pointer h-10 hover:scale-105 duration-150'
+            className='md:hidden cursor-pointer h-10 w-24 hover:scale-105 duration-150'
             onClick={() => {
               navigate('/')
             }}/>

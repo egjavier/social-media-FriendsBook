@@ -11,7 +11,6 @@ import SearchSmall from './SearchSmall'
 import StoriesSection from './Stories/StoriesSection'
 import AddStoryModal from './Stories/AddStoryModal'
 import SearchModal from './Left/SearchModal'
-import CommentModal from './CommentModal'
 
 function HomePage() {
 
@@ -89,28 +88,13 @@ function HomePage() {
       try{
         const q = query(collection(db, "stories"), orderBy("timestamp", "desc"))
         const querySnapshot = await getDocs(q);
-        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))  
-        localStorage.setItem("storiesArray", JSON.stringify(d))
-        setStoriesArray(d)   
+        const d = querySnapshot.docs.map( e => ({...e.data(), id: e.id}))    
         
-        // // REMOVE STORY
-        // d.map(story => {
-        //   const date = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(13, 15)
-        //   const hour = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 18)
-        //   const min = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(19, 21)
-        //   const time = new Date(story.timestamp.seconds * 1000 + story.timestamp.nanoseconds / 1000000).toString().slice(16, 21)
-        //   console.log(`${Number(date) + 1} ${Number(hour) + 1}:${Number(min) + 1}`)
+      // <MAX OF 15 STORIES
+       const story = d.slice(0, 15)
+       localStorage.setItem("storiesArray", JSON.stringify(d))
+       setStoriesArray(d)
 
-        //   if( (hour < 24 && `${Number(date) + 1} ${Number(hour) + 1}:${Number(min) + 1}`) || (hour === 24 && `${Number(date) + 1} 00:${Number(min) + 1}`) ) {
-        //     // DELETE STORY FROM COLLECTION
-        //     deleteDoc(doc(db, "stories", story.id))
-        //     localStorage.setItem("storiesArray", JSON.stringify(d))
-        //     setStoriesArray(d)
-        //   } else {
-        //     localStorage.setItem("storiesArray", JSON.stringify(d))
-        //     setStoriesArray(d)
-        //   }
-        // })
           
         setIsNewStory(false)
       }catch(e) {
@@ -170,7 +154,6 @@ function HomePage() {
       }, 3000)
     }, [])
 
-
  return (
     <section className='relatie profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 my-5'>
       <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2'>
@@ -197,7 +180,6 @@ function HomePage() {
 
       <AddStoryModal />
       <SearchModal />
-      {/* <CommentModal /> */}
     </section>
   )
 }

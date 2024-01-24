@@ -73,7 +73,7 @@ function CommentModal({e}) {
 
 
   return (
-    <dialog id="commentSection" className="modal">
+    <dialog id="commentSection" className="modal" key={e.id}>
       <div className="modal-box">
         {/* TITLE */}
         <div className='flex justify-between mb-3'>

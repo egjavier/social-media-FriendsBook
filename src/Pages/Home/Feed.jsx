@@ -87,7 +87,7 @@ function Feed() {
         setIsLoading(false)
       }, 3000)
     }, [])
-console.log("myComs", myComs)
+
     return (
     <section>
       {
