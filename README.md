@@ -18,32 +18,26 @@ FriendsBook is inspired of Facebook where you can easily sign up, log in, and sh
 Implemented Firebase Auth for secure user registration and authentication.
 Created a user-friendly interface for account creation and login.
 
-
-
 **Manage your Posts and Stories**
 
     I've added a commenting feature, allowing users to share thoughts on friends' posts, fostering engaging conversations. Additionally, I've implemented an "add story" and "add post" feature, giving users the ability to edit and delete their posts for a more dynamic and personalized social experience.
-
-
 
 **Comment Section**
 
     You can post comments on your friends' posts, making the whole experience interactive and lively. Share your thoughts and keep the conversation going—it's the perfect way to enjoy the social vibe!
 
-
-
 **User Search**
 
     Implemented a user search feature in FriendsBook, allowing users to easily find and explore profiles. Now, you can search for other users, visit their profiles, and stay updated on their latest posts. It adds a personalized touch to the social experience, making it simple for users to connect and share within the community.
-
-
 
 **Image Storage with Firebase Storage**
 
     Utilized Firebase Storage for storing and managing users, stories and posts images.
     Implemented a seamless process for associating images with employee profiles.
 
+**Edit Profile**
 
+    Enabling users to easily update their profile information and picture whenever they desire, providing a more personalized and flexible user experience.
 
 **Responsive Design with Tailwind CSS and DAISY UI**
 
