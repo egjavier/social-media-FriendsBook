@@ -18,7 +18,6 @@ function LoginBtn({userEmail, userPassword}) {
         signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
-            console.log('user logged in')
 
           // FETCH DATA
             fetch(user)
@@ -40,7 +39,6 @@ function LoginBtn({userEmail, userPassword}) {
     // FETCH DATA
     const querySnapshot = await getDocs(collection(db, "users"));
     const users = querySnapshot.docs.map( e => ({...e.data(), id: e.id})) 
-    console.log("users", users) 
     users.map(e => {
       if (e.email === user.email ) {
 

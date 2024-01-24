@@ -24,6 +24,7 @@ function AddStoryModal() {
         const storageRef = ref(storage, `stories/${storyFileName}`)
         const uploadTask = uploadBytesResumable(storageRef, storyName)
 
+        //add story image to storage
         uploadTask.on('state_changed',
           (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -38,6 +39,7 @@ function AddStoryModal() {
             console.error(error)
           }, 
           () => {
+            // get story image link from storage
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               setIsRunning(false)
               setStoryUrl(downloadURL)
@@ -65,6 +67,7 @@ function AddStoryModal() {
 const handleAddStoryBtn = async() => {
   try {
     if(storyUrl !== "") {
+      // add story info to STORIES collection
       addDoc(collection(db, "stories"), {
         firstname: userInfo.firstname,
         lastname: userInfo.lastname,

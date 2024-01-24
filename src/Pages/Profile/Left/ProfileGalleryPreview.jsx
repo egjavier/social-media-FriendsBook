@@ -9,7 +9,7 @@ function profileGalleryPreview() {
   // CONTEXT
   const {
           profileGallery,
-          isUpdated, setIsUpdated
+          isUpdated
         } = useContext(Context)
 
 

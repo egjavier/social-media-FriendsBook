@@ -10,8 +10,7 @@ function StoriesSection() {
 
   // CONTEXT
   const {
-          storiesArray,
-          userInfo
+          storiesArray
         } = useContext(Context)
 
   // SKELETON

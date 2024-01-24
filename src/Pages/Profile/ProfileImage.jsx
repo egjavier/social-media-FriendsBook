@@ -7,12 +7,12 @@ function ProfileImage() {
 
   const [ isLoading, setIsLoading ] = useState(true)
   const [ user, setUser ] = useState("")
+  const { id } = useParams()
 
   // CONTEXT
   const { 
           allUsers, 
         } = useContext(Context)
-  const { id } = useParams()
 
   // GET USER
   const getUser = () => {

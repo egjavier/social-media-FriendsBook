@@ -16,7 +16,6 @@ function ThumbnailModal() {
 
   // CONTEXT
   const { 
-          thumbnail, setThumbnail,
           userInfo, setUserInfo,
           uploadedThumbnail, setUploadedThumbnail,
           setAllUsers
@@ -36,7 +35,6 @@ function ThumbnailModal() {
             setUploadProgress('Upload is ' + progress.toString().slice(0, 5) + '% done')
             switch (snapshot.state) {
               case 'running':
-                console.log('Upload is running');
                 setUploadedThumbnail("")
                 break;
             }
@@ -46,7 +44,6 @@ function ThumbnailModal() {
           }, 
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log('File available at', downloadURL);
               setUploadedThumbnail(downloadURL)
             });
           }

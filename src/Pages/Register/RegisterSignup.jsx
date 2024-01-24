@@ -47,10 +47,9 @@ function RegisterSignup() {
           })
         // STORE USERINFO TO LOCALSTORAGE
           fetch(u)
-          console.log("userInfo", userInfo)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
           alert('Error in Creating an account.')
       })
     }catch(error) {
@@ -62,7 +61,6 @@ function RegisterSignup() {
     // FETCH DATA
     const querySnapshot = await getDocs(collection(db, "users"));
     const users = querySnapshot.docs.map( e => ({...e.data(), id: e.id})) 
-    console.log("users", users) 
     users.map(e => {
       if (e.email === u.email ) {
 

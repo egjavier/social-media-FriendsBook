@@ -16,11 +16,11 @@ function ProfilePage() {
 
     // CONTEXT
     const {
-      profilepagePosts, setProfilepagePosts,
-      postsArray, setPostsArray,
-      galleryArray,
-      profileGallery, setProfileGallery,
-    } =  useContext(Context)
+            setProfilepagePosts,
+            postsArray, setPostsArray,
+            galleryArray,
+            setProfileGallery,
+          } =  useContext(Context)
 
     // FETCH POSTS
     const getPosts = async () => {

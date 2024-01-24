@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom'
 function Thumbnail() {
 
   const [ user, setUser ] = useState("")
+  const { id } = useParams()
 
   // CONTEXT
   const { 
           allUsers, 
         } = useContext(Context)
-  const { id } = useParams()
 
   // GET USER
   const getUser = () => {

@@ -11,11 +11,12 @@ function PostBtn() {
           uploadedMedia, setUploadedMedia,
           postText, setPostText,
           postPrivacy, setPostPrivacy,
-          isNewPost, setIsNewPost
+          setIsNewPost
         } = useContext(Context)
 
   const handlePost = async() => {
     try{
+      // add post to the POSTS collection
       if(postText !== "") {
         addDoc(collection(db, "posts"), {
           firstname: userInfo.firstname,
@@ -30,6 +31,7 @@ function PostBtn() {
           userId: userInfo.userId
         })
         
+        // add posted image to GALLERY collection
         if(uploadedMedia !== "") {
             addDoc(collection(db, "gallery"), {
               firstname: userInfo.firstname,

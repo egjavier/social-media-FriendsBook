@@ -10,16 +10,15 @@ import CommentModal from '../Home/CommentModal'
 function MyPosts() {
   // CONTEXT
   const { 
-          myPostsArray, setMyPostsArray, 
-          profilepagePosts, setProfilepagePosts,
-          postsArray,
+          setMyPostsArray, 
+          profilepagePosts,
           userInfo,
           setPostTextEdit,
           myGallery, setMyGallery,
           setPostsArray,
-          isUpdated, setIsUpdated,
-          allComments, setAllComments,
-          myComs, setMyComs
+          setIsUpdated,
+          allComments,
+          setMyComs
         } = useContext(Context)
 
   const [ isLoading, setIsLoading ] = useState(true)

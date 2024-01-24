@@ -25,11 +25,10 @@ function HomePage() {
           setMyPostsArray,
           setMyGallery,
           isNewPost, setIsNewPost,
-          storiesArray, setStoriesArray,
+          setStoriesArray,
           isNewStory, setIsNewStory,
-          allUsers, setAllUsers,
-          updated, setUpdated,
-          allComments, setAllComments
+          setAllUsers,
+          setAllComments
         } = useContext(Context)
 
     // FETCH POSTS

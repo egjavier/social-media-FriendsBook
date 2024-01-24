@@ -8,9 +8,6 @@ import { auth } from './Config/FirebaseConfig'
 import { useContext, useEffect } from "react"
 import Context from "./Context/Context"
 import ProfilePage from "./Pages/Profile/ProfilePage"
-import InboxPage from "./Pages/Inbox/InboxPage"
-import NotificationsPage from "./Pages/Notifications/NotificationsPage"
-import FriendsList from "./Pages/Friends/FriendsList"
 import Gallery from "./Pages/Gallery/GalleryPage"
 
 
@@ -22,10 +19,8 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('User is signed in.')
         setIsLoggedIn(true)
       } else {
-        console.log('User is NOT signed in.')
       }
     })
   }, [])
@@ -38,9 +33,6 @@ function App() {
           <Route path="login" element={isLoggedIn ? <HomePage /> : <LoginPage />} />
           <Route path="home" element={isLoggedIn ? <HomePage /> : <LoginPage />}/>
           <Route path=":id" element={isLoggedIn ? <ProfilePage /> : <LoginPage />}/>
-          <Route path="inbox" element={isLoggedIn ? <InboxPage /> : <LoginPage />}/>
-          <Route path="notifications" element={isLoggedIn ? <NotificationsPage /> : <LoginPage />}/>
-          <Route path="friends" element={isLoggedIn ? <FriendsList /> : <LoginPage />}/>
           <Route path="gallery" element={isLoggedIn ? <Gallery /> : <LoginPage />}/>
         </Route>
         <Route path="*" element={<PageNotFound />} />

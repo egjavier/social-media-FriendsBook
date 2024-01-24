@@ -11,8 +11,8 @@ function CommentModal({e}) {
   // CONTEXT
   const {
           userInfo,
-          allComments, setAllComments,
-          myComs, setMyComs
+          setAllComments,
+          myComs
         } = useContext(Context)
 
   const emptyFields = () => {

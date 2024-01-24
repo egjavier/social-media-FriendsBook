@@ -19,11 +19,11 @@ function Feed() {
           userInfo,
           postsArray, setPostsArray,
           myGallery,
-          setGalleryArray, setMyGallery,
-          galleryArray, setMyPostsArray,
+          setMyGallery,
+          setMyPostsArray,
           setPostTextEdit,
-          allComments, setAllComments,
-          myComs, setMyComs
+          allComments, 
+          setMyComs
         } = useContext(Context)
 
   // FETCH POSTS

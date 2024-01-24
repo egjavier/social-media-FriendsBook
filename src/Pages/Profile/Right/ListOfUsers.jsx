@@ -16,7 +16,6 @@ ListOfUsers() {
   // CONTEXT
   const {
           allUsers,
-          galleryArray,
           setProfileGallery,
         } = useContext(Context)
 
