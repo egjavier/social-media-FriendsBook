@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
-import { doc, getDocs, Timestamp, collection, addDoc, query, orderBy } from "firebase/firestore"
+import { getDocs, Timestamp, collection, addDoc, query, orderBy } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 
 function CommentModal({e}) {
@@ -73,7 +73,7 @@ function CommentModal({e}) {
 
 
   return (
-    <dialog id="commentSection" className="modal" key={e.id}>
+    <dialog id="commentSection" className="modal">
       <div className="modal-box">
         {/* TITLE */}
         <div className='flex justify-between mb-3'>
@@ -93,8 +93,7 @@ function CommentModal({e}) {
 
           <hr />
 
-        <div className='overflow-y-scroll'
-              key={e.id}>
+        <div className='overflow-y-scroll'>
           {/* BODY */}
           <div className='my-3 w-full flex justify-start items-start'>
             {/* USER IMAGE */}
@@ -106,6 +105,7 @@ function CommentModal({e}) {
                   <textarea className='mt-3 p-2 w-full h-32 placeholder:italic
                                       focus:outline-none resize-none bg-gray-100 overflow-scroll rounded-lg'
                             placeholder='Type here...'
+                            id={e.id}
                             value={comment}
                             onChange={e => setComment(e.target.value)}/>
 

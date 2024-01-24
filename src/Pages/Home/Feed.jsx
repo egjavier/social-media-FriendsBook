@@ -132,9 +132,9 @@ function Feed() {
                         </summary>
                         <ul className="shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-fit text-xs">
                           <li onClick={() =>  {
+                                                document.getElementById('editPost').showModal()
                                                 setPostTextEdit(e.postText)
                                                 setPostInfo(e)
-                                                document.getElementById('editPost').showModal()
                                               }}>
                             <a>Edit</a>
                           </li>

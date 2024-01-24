@@ -62,26 +62,26 @@ function ProfilePage() {
       <div className='relative'>
         <Thumbnail />
         <div className='absolute w-full px-10 bottom-[-95px] text-center flex
-                        justify-center md:justify-between md:items-center'>
+                        justify-center lg:justify-between lg:items-center'>
           <ProfileImage />
         </div>
       </div>
 
-      <div className='pt-4 md:pt-0 pb-3 shadow-lg'>
+      <div className='pt-4 lg:pt-0 pb-3 shadow-lg'>
         <div className='mt-12 py-3
-                        md:text-start md:grid md:grid-cols-11 md:mt-0'>
+                        lg:text-start lg:grid lg:grid-cols-11 lg:mt-0'>
           <ProfileName />
         </div>
       </div>
 
-      <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2 h-screen'>
-        <div className='hidden md:block col-span-3'>
+      <div className=' lg:px-1 lg:grid lg:grid-cols-12 lg:gap-2 h-screen'>
+        <div className='hidden lg:block col-span-3'>
           <ProfileGalleryPreview />
         </div>
-        <div className='md:col-span-6 overflow-y-scroll'>
+        <div className='lg:col-span-6 overflow-y-scroll'>
           <MyPosts />
         </div>
-        <div className='hidden md:block col-span-3'>
+        <div className='hidden lg:block col-span-3'>
           <ListOfUsers />
         </div>
       </div>

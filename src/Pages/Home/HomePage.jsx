@@ -155,13 +155,13 @@ function HomePage() {
 
  return (
     <section className='relatie profile max-w-[1200px] mx-auto bg-[#f7f7f7] flex flex-col gap-5 my-5'>
-      <div className=' md:px-1 md:grid md:grid-cols-12 md:gap-2'>
+      <div className=' lg:px-1 lg:grid lg:grid-cols-12 lg:gap-2'>
 
-        <div className='hidden md:block col-span-3'>
+        <div className='hidden lg:block col-span-3'>
           <LeftSection />
         </div>
 
-        <div className='md:relative md:col-span-6 h-screen overflow-scroll'>
+        <div className='lg:relative lg:col-span-6 h-screen overflow-scroll'>
           <AddPost />
           <StoriesSection />
           <div className='pt-3'>
@@ -171,7 +171,7 @@ function HomePage() {
           </div>
         </div>
 
-        <div className='hidden md:block col-span-3'>
+        <div className='hidden lg:block col-span-3'>
           <RightSection />
         </div>
 
