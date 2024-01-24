@@ -4,7 +4,7 @@ import Feed from './Feed'
 import LeftSection from './Left/LeftSection'
 import RightSection from './Right/RightSection'
 import Context from '../../Context/Context'
-import { collection, getDocs, query, orderBy, doc, deleteDoc } from "firebase/firestore"
+import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import AddStorySmall from './Stories/AddStorySmall'
 import SearchSmall from './SearchSmall'

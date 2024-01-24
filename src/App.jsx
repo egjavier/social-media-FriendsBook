@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react"
 import Context from "./Context/Context"
 import ProfilePage from "./Pages/Profile/ProfilePage"
 import Gallery from "./Pages/Gallery/GalleryPage"
+import EditProfilePage from "./Pages/EditProfile/EditProfilePage"
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="home" element={isLoggedIn ? <HomePage /> : <LoginPage />}/>
           <Route path=":id" element={isLoggedIn ? <ProfilePage /> : <LoginPage />}/>
           <Route path="gallery" element={isLoggedIn ? <Gallery /> : <LoginPage />}/>
+          <Route path="editProfile" element={isLoggedIn ? <EditProfilePage /> : <LoginPage />}/>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

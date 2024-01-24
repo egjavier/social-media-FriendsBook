@@ -35,7 +35,6 @@ function AddImagePost() {
           () => {
             //download image link from storage
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log('File available at', downloadURL);
               setUploadedMedia(downloadURL)
             });
           }
