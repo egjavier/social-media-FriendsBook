@@ -56,9 +56,7 @@ function AddPostModal() {
                       value={postPrivacy}
                       onChange={e => setPostPrivacy(e.target.value)}>
                 <option className='italic text-sm text-slate-500'>Public</option>
-                <option className='italic text-sm text-slate-500 '>Friends</option>
-                <option className='italic text-sm text-slate-500 '>Only Me</option>
-              </select>
+             </select>
             </div>
           </div>
 

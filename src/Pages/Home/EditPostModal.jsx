@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { doc, collection, getDocs, query, orderBy, updateDoc } from "firebase/firestore"
+import { doc, collection, getDocs, query, orderBy, updateDoc, where, deleteDoc } from "firebase/firestore"
 import db from '../../Config/FirebaseConfig'
 import Context from '../../Context/Context'
 
@@ -10,6 +10,7 @@ function EditPostModal({e}) {
           setPostsArray,
           userInfo,
           setMyPostsArray,
+          setMyGallery,
           postTextEdit, setPostTextEdit,
           isUpdated, setIsUpdated 
         } = useContext(Context)
@@ -38,7 +39,10 @@ function EditPostModal({e}) {
           setMyPostsArray(array)
         })
 
-      // ALERT
+      // UPDATE GALLERY
+        deleteDoc(doc(db, "gallery", e.id))
+
+        // ALERT
       alert('Post Updated')
       if(isUpdated === true) {
         location.reload()
