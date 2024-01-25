@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context/Context'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
-import { doc, updateDoc } from "firebase/firestore"
+import { collection, getDocs, query, orderBy, where, doc, updateDoc } from "firebase/firestore"
 import db, { storage } from '../../Config/FirebaseConfig'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,7 +32,7 @@ function EditProfilePage() {
         dob !== "" ||
         photo !== ""
       ) {
-        // update user's info from users collection
+        // UPDATE USER'S INFO FROM USERS COLLECTION
           const userRef = doc(db, "users", userInfo.id)
           await updateDoc(userRef, {
             profilePhoto: uploadedPhoto !== "" ? uploadedPhoto : userInfo.profilePhoto,
@@ -43,10 +42,7 @@ function EditProfilePage() {
             dob: dob !== "" ? dob : userInfo.dob,
           })
 
-        // alert
-          alert("Update has been saved.")
-
-        // fetch user's new info from USERS collection
+        // FETCH USER'S NEW INFO FROM USERS COLLECTION
           const querySnapshot = await getDocs(collection(db, "users"));
           const users = querySnapshot.docs.map( e => ({...e.data(), id: e.id})) 
           users.map(e => {
@@ -57,8 +53,58 @@ function EditProfilePage() {
               setUserInfo(e)
             }
           })
+
+        // CHANGE ALL PREVIOUS POSTS INFO
+          const qPosts = query(collection(db, "posts"), where("email", "==", userInfo.email))
+          const querySnapshotPosts = await getDocs(qPosts)
+
+          querySnapshotPosts.forEach((docu) => {
+            // fetch all user's posts
+            const arrayPosts = []
+            const dPsots = {...docu.data(), id: docu.id}
+            arrayPosts.push(dPsots)
+    
+            arrayPosts.map((p) => {
+              // update user's info in all of user's posts
+              const ref = doc(db, "posts", p.id)
+              updateDoc(ref, {
+                profilePhoto: uploadedPhoto !== "" ? uploadedPhoto : userInfo.profilePhoto,
+                firstname: fname !== "" ? fname : userInfo.firstname,
+                lastname: lname !== "" ? lname : userInfo.lastname,
+                displayName: uname !== "" ? uname : userInfo.displayName,
+                dob: dob !== "" ? dob : userInfo.dob,
+            })
+          })
+          })
+
+        // CHANGE ALL GALLERY INFO
+        const qGallery = query(collection(db, "gallery"), where("email", "==", userInfo.email))
+        const querySnapshotGallery = await getDocs(qGallery)
+
+        querySnapshotGallery.forEach((item) => {
+          // fetch all user's posts
+          const arrayGallery = []
+          const qGallery = {...item.data(), id: item.id}
+          arrayGallery.push(qGallery)
+  
+          arrayGallery.map((p) => {
+            // update user's info in all of user's posts
+            const ref = doc(db, "gallery", p.id)
+            updateDoc(ref, {
+              profilePhoto: uploadedPhoto !== "" ? uploadedPhoto : userInfo.profilePhoto,
+              firstname: fname !== "" ? fname : userInfo.firstname,
+              lastname: lname !== "" ? lname : userInfo.lastname,
+              displayName: uname !== "" ? uname : userInfo.displayName,
+              dob: dob !== "" ? dob : userInfo.dob,
+          })
+        })
+        })
+
+
+        // ALERT
+        alert("Update has been saved.")
         
-        // navigate to HOME page
+        // NAVIGATE TO HOME PAGE
         navigate('/home')
 
       } else {
@@ -106,8 +152,6 @@ function EditProfilePage() {
     } catch(e) {
       console.error(e)
     }
-
-    
   }
 
   useEffect(() => {
