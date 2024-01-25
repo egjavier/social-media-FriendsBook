@@ -13,7 +13,6 @@ function EditProfilePage() {
   const [ lname, setLname ] = useState("")
   const [ dob, setDob ] = useState("")
   const [ uname, setUname] = useState("")
-  const [ email, setEmail ] = useState("")
 
   const [ uploadedPhoto, setUploadedPhoto ] = useState("")
   const [ uploadProgress, setUploadProgress ] = useState("")  
@@ -31,7 +30,6 @@ function EditProfilePage() {
         fname !== "" ||
         lname !== "" ||
         uname !== "" ||
-        email !== "" ||
         dob !== "" ||
         photo !== ""
       ) {
@@ -43,7 +41,6 @@ function EditProfilePage() {
             lastname: lname !== "" ? lname : userInfo.lastname,
             displayName: uname !== "" ? uname : userInfo.displayName,
             dob: dob !== "" ? dob : userInfo.dob,
-            email: email !== "" ? email : userInfo.email
           })
 
         // alert
@@ -210,18 +207,6 @@ function EditProfilePage() {
                     className='ps-2 py-1 rounded focus:outline-none col-span-1 text-slate-600 text-xs sm:text-sm
                             bg-white/60 placeholder:text-slate-600 md:text-md border border-slate-300'
             />
-          </div>
-          {/* Email */}
-          <div>
-            <input  type="email"
-                    name='editEmail'
-                    placeholder={userInfo.email}
-                    value={email}
-                    onChange={e => {setEmail(e.target.value)}}
-                    className='indent-2 py-1 rounded focus:outline-none w-full mb-2
-                                text-slate-600 text-xs sm:text-sm bg-white/60 placeholder:text-slate-600
-                                md:text-md border border-slate-300'
-            />         
           </div>
         </div>     
       </div>
