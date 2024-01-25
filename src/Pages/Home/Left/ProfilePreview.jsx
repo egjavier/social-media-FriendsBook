@@ -9,7 +9,7 @@ function ProfilePreview() {
   const [ isLoading, setIsLoading ] = useState(true)
 
   // CONTEXT
-  const { userInfo, myPostsArray } = useContext(Context)
+  const { userInfo, myPostsArray, myGallery } = useContext(Context)
 
   const goToProfile = () => {
     navigate(`/${userInfo.userId}`)
@@ -67,13 +67,13 @@ function ProfilePreview() {
                     <p className='font-bold text-xs text-slate-500'>Post</p>
                   </div>
                   <div className='text-center'>
-                    <p className='font-bold text-slate-800'>2500</p>
-                    <p className='font-bold text-xs text-slate-500'>Followers</p>
+                    <p className='font-bold text-slate-800'>{myGallery.length}</p>
+                    <p className='font-bold text-xs text-slate-500'>Photos</p>
                   </div>
-                  <div className='text-center'>
+                  {/* <div className='text-center'>
                     <p className='font-bold text-slate-800'>278</p>
                     <p className='font-bold text-xs text-slate-500'>Following</p>
-                  </div>
+                  </div> */}
                 </div>
     
                 <div>

@@ -25,10 +25,6 @@ function ProfilePreviewSkeleton() {
           <p className='skeleton w-full h-3'></p>
           <p className='skeleton w-full h-1'></p>
         </div>
-        <div className='w-full flex flex-col gap-1'>
-          <p className='skeleton w-full h-3'></p>
-          <p className='skeleton w-full h-1'></p>        
-        </div>
       </div>
 
       <div>
