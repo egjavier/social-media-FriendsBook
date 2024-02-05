@@ -94,7 +94,7 @@ function MyPosts() {
     }, [])
 
   return (
-    <section>
+    <section className='max-h-[90vh]'>
       {
         isLoading
           ? <FeedSkeleton />

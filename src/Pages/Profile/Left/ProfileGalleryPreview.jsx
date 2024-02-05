@@ -24,7 +24,7 @@ function profileGalleryPreview() {
   }, [])
 
   return (
-    <div className='hidden md:col-span-4 lg:col-span-3 rounded-md gap-3
+    <div className='hidden md:col-span-4 lg:col-span-3 rounded-md gap-3 
                     md:flex md:flex-col md:justify-between md:items-center mt-5'>
       {
         isLoading  === true

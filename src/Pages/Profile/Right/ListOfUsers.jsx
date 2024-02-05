@@ -61,7 +61,7 @@ ListOfUsers() {
   }, [])
 
   return (
-    <div className='hidden md:col-span-4 lg:col-span-3 rounded-md gap-3 bg-white
+    <div className='hidden md:col-span-4 lg:col-span-3 rounded-md gap-3 bg-white max-h-[90vh] overflow-y-scroll
                     md:flex md:flex-col md:justify-between md:items-center mt-5'>
       {
         isLoading === true
